@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="3D 魔方">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2A3044"/>
+      <stop offset="1" stop-color="#151824"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="15" fill="url(#bg)"/>
+  <g stroke="#171A24" stroke-width="1.3" stroke-linejoin="round">
+    <path d="M32 5 L55.38 18.5 L32 32 L8.62 18.5Z" fill="#F7F9FC"/>
+    <path d="M8.62 18.5 L32 32 L32 59 L8.62 45.5Z" fill="#1FA85C"/>
+    <path d="M55.38 18.5 L32 32 L32 59 L55.38 45.5Z" fill="#E23B34"/>
+  </g>
+  <g stroke="#171A24" stroke-width="0.85" fill="none" stroke-linecap="butt">
+    <path d="M39.79 9.5 L16.41 23"/>
+    <path d="M24.21 9.5 L47.59 23"/>
+    <path d="M16.41 23 L16.41 50"/>
+    <path d="M8.62 27.5 L32 41"/>
+    <path d="M47.59 23 L47.59 50"/>
+    <path d="M55.38 27.5 L32 41"/>
+    <path d="M47.59 14 L24.21 27.5"/>
+    <path d="M16.41 14 L39.79 27.5"/>
+    <path d="M24.21 27.5 L24.21 54.5"/>
+    <path d="M8.62 36.5 L32 50"/>
+    <path d="M39.79 27.5 L39.79 54.5"/>
+    <path d="M55.38 36.5 L32 50"/>
+  </g>
+</svg>
