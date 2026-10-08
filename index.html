@@ -226,6 +226,94 @@
 
   .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
 
+  /* ---------- Topbar: view tabs ---------- */
+  .tabs{
+    display:flex;align-items:center;gap:2px;padding:3px;
+    background:var(--paper);border:1px solid var(--line);border-radius:999px;
+  }
+  .tab{
+    appearance:none;border:none;background:none;cursor:pointer;
+    font-family:inherit;font-size:13.5px;font-weight:500;color:var(--muted);
+    padding:6px 17px;border-radius:999px;white-space:nowrap;
+    transition:color .18s,background .18s;
+  }
+  .tab:hover{color:var(--ink-2);}
+  .tab.active{background:var(--ink);color:var(--bg);}
+
+  /* ---------- Views ---------- */
+  .view[hidden]{display:none;}
+
+  /* ---------- App Center (Launchpad) ---------- */
+  .launchpad{
+    position:relative;min-height:calc(100vh - 56px);padding:40px 36px 72px;overflow:hidden;
+    display:flex;flex-direction:column;justify-content:center;
+  }
+  .launchpad-bg{
+    position:absolute;inset:0;pointer-events:none;
+    background:
+      radial-gradient(640px 460px at 12% 2%, rgba(199,95,44,.15), rgba(199,95,44,0) 68%),
+      radial-gradient(700px 520px at 88% 10%, rgba(47,107,237,.13), rgba(47,107,237,0) 70%),
+      radial-gradient(820px 560px at 50% 106%, rgba(139,92,246,.11), rgba(139,92,246,0) 70%);
+  }
+  .lp-inner{position:relative;width:100%;max-width:960px;margin:0 auto;}
+  .lp-head{text-align:center;margin-bottom:32px;}
+  .lp-title{
+    margin:0;font-family:"Fraunces","Noto Serif SC",serif;
+    font-size:clamp(28px,3.6vw,40px);font-weight:400;letter-spacing:-.8px;color:var(--ink);
+  }
+  .lp-sub{font-size:13.5px;color:var(--muted);margin-top:9px;letter-spacing:.1px;}
+
+  .lp-search{position:relative;max-width:330px;margin:0 auto 44px;}
+  .lp-search input{
+    width:100%;padding:11px 16px 11px 40px;
+    font-family:inherit;font-size:14px;color:var(--ink);
+    background:rgba(255,255,255,.68);border:1px solid var(--line);border-radius:999px;outline:none;
+    -webkit-backdrop-filter:blur(12px) saturate(140%);backdrop-filter:blur(12px) saturate(140%);
+    transition:border-color .2s,box-shadow .2s,background .2s;
+  }
+  .lp-search input::placeholder{color:var(--muted);}
+  .lp-search input:focus{border-color:var(--accent);background:#fff;box-shadow:0 0 0 3px var(--accent-soft);}
+  .lp-search .lp-search-ico{position:absolute;left:15px;top:50%;transform:translateY(-50%);color:var(--line-strong);pointer-events:none;}
+
+  .lp-grid{
+    display:grid;grid-template-columns:repeat(auto-fit,122px);
+    justify-content:center;gap:30px 16px;
+  }
+  .app{
+    display:flex;flex-direction:column;align-items:center;gap:9px;
+    width:122px;padding:4px 0 6px;border-radius:16px;
+    text-decoration:none;color:var(--ink);
+    transition:transform .22s cubic-bezier(.2,.8,.3,1);
+  }
+  .app-icon{
+    position:relative;width:84px;height:84px;border-radius:20px;
+    box-shadow:0 10px 24px -12px rgba(20,20,19,.45),0 2px 6px -2px rgba(20,20,19,.16);
+    transition:transform .24s cubic-bezier(.2,.8,.3,1),box-shadow .24s;
+  }
+  .app-icon svg{display:block;width:100%;height:100%;border-radius:20px;}
+  .app:hover .app-icon{
+    transform:translateY(-4px) scale(1.06);
+    box-shadow:0 20px 34px -14px var(--glow,rgba(20,20,19,.5)),0 4px 10px -3px rgba(20,20,19,.16);
+  }
+  .app:active .app-icon{transform:translateY(-1px) scale(1.01);}
+  .app-name{font-size:13px;font-weight:500;color:var(--ink);text-align:center;line-height:1.35;letter-spacing:-.1px;}
+  .app-badge{
+    position:absolute;top:-6px;right:-7px;z-index:2;
+    font-size:9.5px;font-weight:600;letter-spacing:.6px;line-height:1.5;
+    padding:1px 7px;border-radius:999px;
+    background:var(--accent);color:#fff;border:1.5px solid var(--bg);
+    box-shadow:0 4px 10px -4px rgba(199,95,44,.9);
+  }
+  .lp-empty{
+    text-align:center;padding:48px 0;color:var(--muted);
+    font-family:"Fraunces",serif;font-style:italic;font-size:14px;
+  }
+  .lp-foot{margin-top:54px;text-align:center;font-size:12.5px;color:var(--muted);letter-spacing:.2px;}
+  .lp-foot code{
+    font-family:"JetBrains Mono",ui-monospace,monospace;font-size:11.5px;
+    background:var(--paper);border:1px solid var(--line);border-radius:5px;padding:1px 5px;color:var(--ink-2);
+  }
+
   @media(max-width:980px){
     .wrap{grid-template-columns:1fr;padding:0 22px 60px;gap:0;}
     .sidenav{display:none;}
@@ -239,6 +327,14 @@
     .sec-desc,.link-grid{padding-left:0;margin-left:0;}
     .topbar-inner{padding:12px 22px;}
     .clock-display{display:none;}
+    .brand-sub,.brand-sep{display:none;}
+    .tab{padding:6px 13px;font-size:13px;}
+    .launchpad{padding:28px 20px 56px;min-height:calc(100vh - 52px);}
+    .lp-grid{grid-template-columns:repeat(auto-fit,98px);gap:26px 10px;}
+    .app{width:98px;}
+    .app-icon{width:70px;height:70px;border-radius:17px;}
+    .app-icon svg{border-radius:17px;}
+    .lp-search{margin-bottom:34px;}
   }
 </style>
 </head>
@@ -252,6 +348,10 @@
       <span class="brand-sep">/</span>
       <span class="brand-sub">Personal Portal</span>
     </a>
+    <nav class="tabs" id="tabs" role="tablist" aria-label="视图切换">
+      <button class="tab active" type="button" role="tab" data-view="links" aria-selected="true">导航</button>
+      <button class="tab" type="button" role="tab" data-view="apps" aria-selected="false">应用中心</button>
+    </nav>
     <div class="topbar-right">
       <div class="clock-display">
         <div class="clock-time" id="clock-time">--:--</div>
@@ -260,6 +360,8 @@
     </div>
   </div>
 </header>
+
+<div class="view" id="view-links">
 
 <section class="hero">
   <div class="hero-left">
@@ -300,6 +402,30 @@
   <main id="main-content"></main>
 </div>
 
+</div><!-- /view-links -->
+
+<div class="view" id="view-apps" hidden>
+  <div class="launchpad">
+    <div class="launchpad-bg"></div>
+    <div class="lp-inner">
+      <div class="lp-head">
+        <h2 class="lp-title">应用中心</h2>
+        <div class="lp-sub">我写过的一些小东西 &middot; 点图标直接打开</div>
+      </div>
+      <div class="lp-search">
+        <svg class="lp-search-ico" width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <circle cx="7" cy="7" r="4.6" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M10.6 10.6 14 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <input type="search" id="app-search" placeholder="搜索应用…" autocomplete="off" aria-label="搜索应用">
+      </div>
+      <div class="lp-grid" id="lp-grid"></div>
+      <div class="lp-empty" id="lp-empty" hidden>没有找到匹配的应用</div>
+      <div class="lp-foot">就这些，还会慢慢加 &mdash; 新应用写进 <code>apps.js</code> 就会自动出现在这里</div>
+    </div>
+  </div>
+</div>
+
 <footer>
   <div class="foot-inner">
     <span>Intelligent-GuoXin &middot; <span class="serif">A personal developer portal</span></span>
@@ -309,6 +435,7 @@
 
 <div id="sr-live" class="sr-only" aria-live="polite"></div>
 
+<script src="apps.js"></script>
 <script src="links.js"></script>
 <script>
 (function(){
@@ -424,6 +551,82 @@
       });
   }
 
+  /* ---------- 应用中心 (Launchpad) ---------- */
+  var currentView = 'links';
+
+  function renderApps(filter){
+    var grid = document.getElementById('lp-grid');
+    var empty = document.getElementById('lp-empty');
+    if(!grid) return;
+
+    var q = (filter || '').trim().toLowerCase();
+    var all = (typeof APPS === 'undefined') ? [] : APPS;
+    var list = all.filter(function(a){
+      if(!q) return true;
+      var hay = (a.name + ' ' + a.desc + ' ' + (a.tags || []).join(' ')).toLowerCase();
+      return hay.indexOf(q) > -1;
+    });
+
+    grid.innerHTML = list.map(function(a){
+      return '<a class="app" href="' + a.url + '"' +
+        ' title="' + a.name + ' · ' + a.desc + '"' +
+        (a.glow ? ' style="--glow:' + a.glow + '"' : '') + '>' +
+        '<span class="app-icon">' +
+          (a.badge ? '<span class="app-badge">' + a.badge + '</span>' : '') +
+          a.icon +
+        '</span>' +
+        '<span class="app-name">' + a.name + '</span>' +
+      '</a>';
+    }).join('');
+
+    grid.hidden = (list.length === 0);
+    empty.hidden = (list.length !== 0);
+  }
+
+  function switchView(view, opts){
+    if(view !== 'apps') view = 'links';
+    currentView = view;
+
+    document.getElementById('view-links').hidden = (view === 'apps');
+    document.getElementById('view-apps').hidden = (view !== 'apps');
+
+    document.querySelectorAll('#tabs .tab').forEach(function(b){
+      var on = b.getAttribute('data-view') === view;
+      b.classList.toggle('active', on);
+      b.setAttribute('aria-selected', on ? 'true' : 'false');
+    });
+
+    if(history.replaceState) history.replaceState(null, '', '#' + view);
+    if(!opts || !opts.keepScroll) window.scrollTo(0, 0);
+
+    if(view === 'links'){
+      document.getElementById('search-input').setAttribute('placeholder', ENGINES[currentEngine].placeholder);
+      window.dispatchEvent(new Event('scroll'));
+    }else{
+      var s = document.getElementById('app-search');
+      if(s) s.blur();
+    }
+  }
+
+  function initTabs(){
+    document.querySelectorAll('#tabs .tab').forEach(function(btn){
+      btn.addEventListener('click', function(){ switchView(btn.getAttribute('data-view')); });
+    });
+
+    var brand = document.querySelector('.brand');
+    if(brand) brand.addEventListener('click', function(e){
+      e.preventDefault();
+      switchView('links');
+    });
+
+    var box = document.getElementById('app-search');
+    if(box) box.addEventListener('input', function(){ renderApps(box.value); });
+
+    renderApps('');
+
+    if(location.hash === '#apps') switchView('apps', { keepScroll: true });
+  }
+
   window.faviconFail = function(img){
     img.style.display = 'none';
     var span = document.createElement('span');
@@ -438,11 +641,16 @@
   initSearch();
   initSidenav();
   initPoetry();
+  initTabs();
 
   document.addEventListener('keydown', function(e){
-    if(e.key === '/' && document.activeElement.tagName !== 'INPUT'){
+    var tag = document.activeElement ? document.activeElement.tagName : '';
+    if(e.key === '/' && tag !== 'INPUT' && tag !== 'TEXTAREA' && currentView === 'links'){
       e.preventDefault();
       document.getElementById('search-input').focus();
+    }
+    if(e.key === 'Escape' && currentView === 'apps'){
+      switchView('links');
     }
   });
 })();
