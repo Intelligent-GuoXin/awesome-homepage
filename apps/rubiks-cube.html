@@ -2163,11 +2163,17 @@ const X = (function () {
    *   面块 1 个边界坐标 → 6(N-2)² 个
    *   其余是看不见的内块，直接丢弃（不影响外观，也不影响可解性）
    *
-   * 【关键物理约束】奇数阶的中层不能转。
-   *   5×5 及所有奇数阶都有 6 个「固定中心块」，用螺丝锁在核心上，
-   *   它们正好落在中层里，所以中层转不动（这也是 5×5 状态数 2.83e74
-   *   这一官方数值成立的前提）。偶数阶没有锚定块，任意单层都能独立转
-   *   （「第 k 层单独转」物理上靠 Rw 之后再 R' 实现，所以是合法动作）。
+   * 【奇数阶的中层是可以转的】
+   *   实体魔方拧中层完全合法，只是机械后果是核心跟着一起转，于是六个
+   *   「固定中心块」整体换面 —— 这正是 M = L' R X' 里那个整体转动 X'。
+   *   也就是说「中层转动 = 一次整体转动 × 若干外层转动」，它会让我们看到的
+   *   色框偏掉一个整体旋转。这是真实的物理行为，不是异常。
+   *   （早先这里按「固定中心块锁在核心上所以中层转不动」把中层锁死了，
+   *     那个推导是错的；真正的原因是当时 3 阶 LBL 求解器假定色框规范，
+   *     锁死中层就绕开了这个问题。现在求解器会按当前色框做几何归一化，
+   *     所以锁可以撤掉。）
+   *   偶数阶没有锚定块，任意单层都能独立转（「第 k 层单独转」物理上靠
+   *   Rw 之后再 R' 实现）。
    * ==========================================================================*/
 
 
@@ -2215,7 +2221,8 @@ const X = (function () {
       const axisName = AXES[a];
       for (let l = 0; l < N; l++) {
         const c = pos(l);
-        if (N % 2 === 1 && c === 0) continue;              // 奇数阶中层不可转
+        /* 奇数阶的中层（c === 0）同样可转；方向跟「+ 侧」一致（见上面的说明）。 */
+        const isMiddle = (N % 2 === 1) && c === 0;
         const side = c >= 0 ? '+' : '-';
         const face = FACE_OF[axisName + side];
         const depth = c >= 0 ? (last - l + 1) : (l + 1);   // 距该侧外表面第几层（最外层 = 1）
@@ -2229,7 +2236,7 @@ const X = (function () {
             angle,
             R: matAxisAngle(axisName, angle),
             select: (p) => Math.abs(p[a] - c) < 1e-6,
-            meta: { axis: a, axisName, layer: l, coord: c, amount, face, side, depth, isMiddle: false },
+            meta: { axis: a, axisName, layer: l, coord: c, amount, face, side, depth, isMiddle },
           });
         }
       }
@@ -2263,7 +2270,15 @@ const X = (function () {
 
   function notationOf (puz, m) {
     const meta = puz.moves[m].meta;
-    const suffix = meta.amount === 1 ? '' : meta.amount === 2 ? '2' : "'";
+    const suffixOf = (amt) => amt === 1 ? '' : amt === 2 ? '2' : "'";
+    /* 奇数阶的中层用标准 M / E / S 记号。注意本模型里中层的正向跟着「+ 侧」
+       （R / U / F）走，而标准 M / E / S 跟着 L / D / F 走，所以量数要翻过来：
+       本模型的 1 圈 = M'，3 圈 = M。 */
+    if (meta.isMiddle) {
+      const letter = meta.axisName === 'x' ? 'M' : meta.axisName === 'y' ? 'E' : 'S';
+      return letter + suffixOf((4 - meta.amount) % 4);
+    }
+    const suffix = suffixOf(meta.amount);
     const d = meta.depth > 1 ? String(meta.depth) : '';
     return `${d}${meta.face}${suffix}`;
   }
@@ -4384,7 +4399,14 @@ function start (THREE) {
   const coordOf = (i) => i - cubeHalf();
   const layerOf = (v) => Math.round(v + cubeHalf());          // 坐标 → 层号 0..N-1
   const layerCoord = (l) => coordOf(l);                        // 层号 → 坐标
-  const isTurnable = (l) => N % 2 === 0 || layerCoord(l) !== 0; // 奇数阶中层锁死（与实体魔方一致）
+  /* 所有层都能转，奇数阶的中层也一样（见 nxnSpec 上面的说明）。
+     之前这里 return `N % 2 === 0 || layerCoord(l) !== 0` 把中层锁死了，
+     那是为了迁就 3 阶 LBL 求解器假定的规范色框；现在求解器会按当前色框
+     归一化，锁就不需要了。 */
+  const isTurnable = () => true;
+  /* 打乱只用外层：跟 WCA 一致，也让刚打乱完的魔方保持「经典长相」
+     （中层一转色框就偏了，六个中心块会换面）。中层留给用户手动拧。 */
+  const isScrambleLayer = (l) => !(N % 2 === 1 && layerCoord(l) === 0);
 
   function buildCube () {
     // 清空上一颗（几何体/材质是共享的，不能 dispose）
@@ -4488,11 +4510,11 @@ function start (THREE) {
 
   function enqueue (axis, layer, dir, opts) {
     opts = opts || {};
-    /* 防御：层号必须是合法下标，且不能是奇数阶锁死的中层。
+    /* 防御：层号必须是合法下标。
        3 阶那三种方法吐出来的是「-1/0/+1」的旧表达，必须过 LAYER3 换成下标，
        否则会出现「画面把中层当 U 层转了、抽象模型却不动」这种悄悄漂移。 */
     if (!(layer >= 0 && layer < N)) { console.warn('非法层号，已忽略：', axis, layer, dir); return; }
-    if (!isTurnable(layer)) { console.warn('奇数阶中层不可单独转动，已忽略：', axis, layer); return; }
+    if (!isTurnable(layer)) { console.warn('该层不可转动，已忽略：', axis, layer); return; }
     queue.push({
       axis, layer, dir,
       duration: opts.duration || TURN_MS,
@@ -4655,7 +4677,7 @@ function start (THREE) {
   function applyToModel (axisName, layer, dir) {
     if (!puz) return;
     const mi = moveIndexOf(axisName, layer, dir);
-    if (mi === undefined) return;      // 奇数阶中层：两边都不允许，静默忽略
+    if (mi === undefined) return;      // 找不到对应动作：静默忽略
     X.applyMoveInPlace(puz, nxState, mi);
   }
 
@@ -4663,13 +4685,23 @@ function start (THREE) {
     if (puz) nxState = puz.blank();
   }
 
-  /** 视觉复原判据（按颜色，不比块朝向）：4 阶以上同色块可互换，比朝向会误判 */
+  /** 视觉复原判据（按颜色，不比块朝向）：4 阶以上同色块可互换，比朝向会误判。
+   *  另外这一版是**帧无关**的：判「每个面是否同色」，而不是「是否等于规范配色」。
+   *  奇数阶拧中层会让核心整体转一个 ρ，六个中心块跟着换面，规范配色就永远对不上，
+   *  可魔方其实已经复原了（整魔方转一下不算打乱）。
+   *  fm.solvedColor[f] 是「面片 f 本家的颜色」—— 同一个面的面片本家色相同，
+   *  正好拿来当分组键（不依赖 fm 内部面片的排列顺序）。 */
   let _nxCol = null;
   function nxIsSolved () {
     if (!puz) return true;
     if (!_nxCol || _nxCol.length !== fm.nF) _nxCol = new Uint8Array(fm.nF);
     const c = X.faceletColors(fm, puz, nxState, _nxCol);
-    for (let f = 0; f < fm.nF; f++) if (c[f] !== fm.solvedColor[f]) return false;
+    const faceColor = new Map();          // 本家色 → 这一面当前实际显示的颜色
+    for (let f = 0; f < fm.nF; f++) {
+      const home = fm.solvedColor[f], cur = c[f];
+      if (!faceColor.has(home)) faceColor.set(home, cur);
+      else if (faceColor.get(home) !== cur) return false;
+    }
     return true;
   }
 
@@ -4680,7 +4712,7 @@ function start (THREE) {
     for (let i = 0; i < n; i++) {
       const pool = [];
       for (const axis of AXIS3) {
-        for (let layer = 0; layer < N; layer++) if (isTurnable(layer)) pool.push({ axis, layer });
+        for (let layer = 0; layer < N; layer++) if (isScrambleLayer(layer)) pool.push({ axis, layer });
       }
       let pick = null;
       for (let tries = 0; tries < 40; tries++) {
@@ -4730,11 +4762,52 @@ function start (THREE) {
   const _rotM = new THREE.Matrix4();
   const _stkN = new THREE.Vector3();
 
+  /* ---- 色框归一化 ----
+     奇数阶拧了中层之后，核心跟着转，六个固定中心块整体换了面 ——
+     也就是说眼前这个魔方相对「规范配色」偏了一个整体旋转 ρ。而 3 阶 LBL 求解器的
+     目标色（M.SOLVED）是按规范配色写死的，直接拿「实际朝向」的颜色喂进去，
+     它就会去把 U 面刷成白色，而坐在 U 面中心的偏偏是别的色，于是永远刷不出来
+     （实测表现：复原卡在「进行中」）。
+     所以读面片时先把 ρ 除掉：把每个贴纸的 位置/法线 用 ρ 投到规范朝向再查索引，
+     得到的 state 与求解器的坐标系一致；解法出来之后再决定怎么落回实际朝向
+     （见下面的「先整体转正，再按规范色框复原」；实在不行还有 frameMapMove 兜底）。 */
+  const FACE_IDX = {};                       // 面字母 → FACE_ORDER 下标
+  const FACE_NRM = {};                       // 面字母 → 该面外法线 [x,y,z]
+  M.FACE_ORDER.forEach((f, fi) => {
+    FACE_IDX[f] = fi;
+    FACE_NRM[f] = M.POS[fi * 9 + 4].n;       // 面心面片的法线就是该面的朝向
+  });
+  const _faceMul = (m, v) => [
+    m[0] * v[0] + m[1] * v[1] + m[2] * v[2],
+    m[3] * v[0] + m[4] * v[1] + m[5] * v[2],
+    m[6] * v[0] + m[7] * v[1] + m[8] * v[2],
+  ];
+  /* 由「每个面中心当前是什么色」反推 ρ。返回行优先 3×3（整数 0/±1），
+     读不全或色框不是纯旋转时返回 null（调用方按规范色框处理）。 */
+  function frameRotation (raw) {
+    const col2face = {};
+    for (const f of M.FACE_ORDER) {
+      const col = raw[FACE_IDX[f] * 9 + 4];
+      if (!col || col === '?') return null;
+      col2face[col] = f;
+    }
+    /* φ(f) = 当前正显示「规范色 f」的那一面；ρ 的三行就是 n_{φ(R)}, n_{φ(U)}, n_{φ(F)} */
+    const nR = FACE_NRM[col2face.R], nU = FACE_NRM[col2face.U], nF = FACE_NRM[col2face.F];
+    if (!nR || !nU || !nF) return null;
+    const m = [nR[0], nR[1], nR[2], nU[0], nU[1], nU[2], nF[0], nF[1], nF[2]];
+    const det = m[0] * (m[4] * m[8] - m[5] * m[7])
+      - m[1] * (m[3] * m[8] - m[5] * m[6])
+      + m[2] * (m[3] * m[7] - m[4] * m[6]);
+    return det === 1 ? m : null;             // 色框不可能是镜像；不是 +1 就当没偏
+  }
+  let frameRot = null;                       // 最近一次读面片时用到的 ρ（null = 规范）
+
   // 读回 54 面片状态：cubie 的整数坐标 = 位置，贴纸的世界法线 = 朝向。
   // 索引规则与求解器模型完全一致（M.AT / M.keyOf），所以它解的就是眼前这个魔方。
   function readFaceletState () {
     for (const c of cubies) c.updateMatrixWorld(true);  // 必须先刷新，否则拿到的是初始朝向
-    const state = new Array(54).fill('?');
+    const raw = new Array(54).fill('?');
+    const seen = [];
     for (const c of cubies) {
       const p = [Math.round(c.position.x), Math.round(c.position.y), Math.round(c.position.z)];
       for (const st of c.children) {
@@ -4744,10 +4817,114 @@ function start (THREE) {
         const nn = [Math.round(_stkN.x), Math.round(_stkN.y), Math.round(_stkN.z)];
         const i = M.AT.get(M.keyOf(p, nn));
         if (i === undefined) throw new Error('面片无法归属：' + JSON.stringify({ p, nn }));
-        state[i] = KEY2FACE[st.userData.key];
+        raw[i] = KEY2FACE[st.userData.key];
+        seen.push({ p, nn, col: raw[i] });
       }
     }
+    const fr = frameRotation(raw);
+    frameRot = fr;
+    if (!fr) return raw;                     // 色框规范（或读不全）→ 原样返回
+    const state = new Array(54).fill('?');
+    for (const it of seen) {
+      const p = _faceMul(fr, it.p), nn = _faceMul(fr, it.nn);
+      const i = M.AT.get(M.keyOf(p, nn));
+      if (i === undefined) throw new Error('色框归一化后面片无法归属：' + JSON.stringify({ p, nn }));
+      state[i] = it.col;
+    }
     return state;
+  }
+
+  /* 兜底路径：把解法里「规范色框」的动作映回实际朝向。
+     ρ 的第 a 行只有一个非零 ±1（s，落在第 k 列），于是
+       规范里「绕 +e_a 转 layer 层、角度 dir·90°」
+       → 实际里「绕 +e_k 转 layer·s 层、角度 s·dir·90°」。
+     正常情况下走的是上面那条「先整体转正」，这里只在转正词没找到、
+     或者抽象模型与画面不同步（模型不可信）时才用。 */
+  function frameMapMove (m) {
+    if (!frameRot) return m;
+    const r = frameRot, a = AXIS3.indexOf(m.axis);
+    for (let k = 0; k < 3; k++) {
+      const s = r[a * 3 + k];
+      if (!s) continue;
+      return Object.assign({}, m, { axis: AXIS3[k], layer: s * m.layer, dir: s * m.dir });
+    }
+    return m;
+  }
+
+  /* ---- 「先整体转正，再按规范色框复原」 ----
+     解法是在规范色框下算出来的（见上）。若色框偏了 ρ，光把解按 ρ 映回实际朝向虽然也能
+     收尾（六面同色），但整体朝向是偏的 —— 观感上就是「复原之后侧面的颜色换了」。
+     真实魔方里把核心拧回来是很自然的一步，这里也补上：
+       整体旋转 = **所有层在世界坐标里转同一个角度**（各层正好铺满整个魔方），
+       所以「把色框转回规范」就等于在解法前面插一段「全层同向转」。
+     转哪些轴、各转几圈，用 BFS 在整体旋转群里找 —— 判据直接拿抽象模型验
+     （把候选词作用到当前状态上，看六个中心面片是否都回到本家色），
+     纯黑盒，不牵扯矩阵左右乘那套符号约定。 */
+
+  /** 六个中心面片是否都回到本家色（= 色框已经转正） */
+  let _fcBuf = null;
+  function centersCanonical (st) {
+    if (!_fcBuf || _fcBuf.length !== fm.nF) _fcBuf = new Uint8Array(fm.nF);
+    const c = X.faceletColors(fm, puz, st, _fcBuf);
+    const off = N;
+    for (let f = 0; f < fm.nF; f++) {
+      const P = fm.dict.list[f];
+      let k = -1;
+      for (let a = 0; a < 3; a++) if (Math.abs(P[a]) === off) { k = a; break; }
+      if (k < 0) continue;
+      const o = [0, 1, 2].filter(a => a !== k);
+      if (P[o[0]] !== 0 || P[o[1]] !== 0) continue;   // 不是面心那一格
+      if (c[f] !== fm.solvedColor[f]) return false;
+    }
+    return true;
+  }
+
+  /* 整体旋转的生成元：绕某轴、所有层同向转 90°（dir 就是世界角度的符号） */
+  const FRAME_GENS = [];
+  for (const axis of AXIS3) for (const dir of [1, -1]) FRAME_GENS.push({ axis, dir });
+
+  /** 把 src 整体转一下写进 dst：逐层套用同一个 dir（世界角度一致 → 就是整体转） */
+  function wholeTurn (axisName, dir, src, dst) {
+    dst.set(src);
+    for (let l = 0; l < N; l++) {
+      const mi = moveIndexOf(axisName, l, dir);
+      if (mi === undefined) { dst.set(src); return false; }
+      X.applyMoveInPlace(puz, dst, mi);
+    }
+    return true;
+  }
+
+  /** BFS 找「把色框转回规范」的全层转词。返回 null = 没找到（调用方走兜底）。
+      整体旋转群只有 24 个元素，去重之后搜索量极小。 */
+  function frameFixWord () {
+    const base = Uint8Array.from(nxState);
+    if (centersCanonical(base)) return [];
+    const seen = new Set([base.join(',')]);
+    let frontier = [{ st: base, word: [] }];
+    for (let depth = 0; depth < 4 && frontier.length; depth++) {
+      const next = [];
+      for (const node of frontier) {
+        for (const g of FRAME_GENS) {
+          const st = new Uint8Array(puz.nPieces);
+          if (!wholeTurn(g.axis, g.dir, node.st, st)) continue;
+          const key = st.join(',');
+          if (seen.has(key)) continue;
+          seen.add(key);
+          const word = node.word.concat([g]);
+          if (centersCanonical(st)) return word;
+          next.push({ st, word });
+        }
+      }
+      frontier = next;
+    }
+    return null;
+  }
+
+  /** 全层转词 → 页面动作 */
+  function frameFixMoves (word) {
+    const out = [];
+    for (const g of word) for (let l = 0; l < N; l++) out.push({ axis: g.axis, layer: l, dir: g.dir });
+    return out;
   }
 
   function doSolve () {
@@ -4797,11 +4974,29 @@ function start (THREE) {
     }
     /* 把解法里的层号**统一规范化成页面用的下标（0..N-1）**再存进 solvePlan。
        内联 LBL 求解器吐出来的是旧表达「-1/0/+1」，必须过 LAYER3；
-       规范化之后，自动播放和「上一步 / 下一步」就能共用同一份 moves 了。 */
-    const norm = res.moves.map(m => ({
-      axis: m.axis, layer: LAYER3[m.layer], dir: m.dir,
-      stage: m.stage, label: m.label, alg: m.alg
-    }));
+       规范化之后，自动播放和「上一步 / 下一步」就能共用同一份 moves 了。
+
+       色框（六个中心块的朝向）分两种情况：
+       · 没偏（绝大多数情况）→ 解法原样用，一步不多。
+       · 偏了 ρ（用户拧过中层）→ 先插一段「整体转正」把色框转回规范，再用规范解法，
+         收尾就落在**原本那个朝向**上，不会出现「复原完侧面颜色换了」。
+         兜底：万一没找到转正词、或抽象模型和画面已经不同步（那模型就不能当真），
+         退回「按 ρ 把解映回实际朝向」—— 结果依旧六面同色，只是整体朝向偏着。 */
+    let preMoves = [], fallbackMap = false;
+    if (!centersCanonical(nxState)) {
+      const word = visualBad() === 0 ? frameFixWord() : null;
+      if (word) preMoves = frameFixMoves(word);
+      else fallbackMap = true;
+    }
+    const norm = [];
+    for (const m of preMoves) norm.push({ axis: m.axis, layer: m.layer, dir: m.dir, stage: 0, label: null, alg: null });
+    for (const m of res.moves) {
+      const q = fallbackMap ? frameMapMove(m) : m;
+      norm.push({
+        axis: q.axis, layer: LAYER3[q.layer], dir: q.dir,
+        stage: m.stage, label: m.label, alg: m.alg
+      });
+    }
     solvePlan = Object.assign({}, res, { moves: norm });
     solveTotal = norm.length;
     solveDone = 0;
@@ -4949,12 +5144,21 @@ function start (THREE) {
      原因：角块绕自身体对角线转 120°、棱块绕长轴转 180°，贴纸位置完全不变，
      物理上就已经复原了，但四元数不是单位阵 —— 层先法解完后经常就停在这类等价朝向上，
      用四元数比会把「其实已经复原」误判成未复原。
-     3 阶沿用原来那套 54 面片读数（保持对外的 state() 签名不变）；
-     其它阶数直接用与画面同步的抽象模型。 */
-  const SOLVED_FACELET_SIG = M.SOLVED.join('');
+     判据本身是**帧无关**的：只看「每个面内部是否同色」，跟六个中心块当前是什么色无关。
+     拧过中层之后色框会偏，规范配色签名（M.SOLVED）永远对不上，但那个魔方确实已经复原了
+     （整魔方转一下不算打乱）。
+     3 阶走画面读数（54 面片），其它阶数用与画面同步的抽象模型。 */
+  function facesUniform (st) {
+    for (let fi = 0; fi < 6; fi++) {
+      const c0 = st[fi * 9];
+      if (!c0 || c0 === '?') return false;
+      for (let k = 1; k < 9; k++) if (st[fi * 9 + k] !== c0) return false;
+    }
+    return true;
+  }
   function isSolved () {
     if (N !== 3) return nxIsSolved();
-    try { return readFaceletState().join('') === SOLVED_FACELET_SIG; }
+    try { return facesUniform(readFaceletState()); }
     catch (err) { return false; }   // 动画中途坐标非整数，读不出完整面片 → 视为未复原
   }
 
@@ -5421,7 +5625,7 @@ function start (THREE) {
       const av = new THREE.Vector3().crossVectors(n, t);   // 候选旋转轴（带符号）
       const axisName = Math.abs(av.x) > 0.5 ? 'x' : (Math.abs(av.y) > 0.5 ? 'y' : 'z');
       const layer = layerOf(hit.cubie.position[axisName]);
-      if (layer < 0 || layer >= N || !isTurnable(layer)) continue;  // 奇数阶中层锁死，忽略这个手势
+      if (layer < 0 || layer >= N || !isTurnable(layer)) continue;  // 层号非法则忽略这个手势
       const base = Math.sign(av[axisName]) || 1;
 
       for (const d of [base, -base]) {

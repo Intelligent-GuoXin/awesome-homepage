@@ -239,9 +239,135 @@
   }
   .tab:hover{color:var(--ink-2);}
   .tab.active{background:var(--ink);color:var(--bg);}
+  .tab-count{
+    font-family:"JetBrains Mono",ui-monospace,monospace;font-size:10px;
+    margin-left:6px;opacity:.6;
+  }
 
   /* ---------- Views ---------- */
   .view[hidden]{display:none;}
+
+  /* ---------- GitHub 仓库收藏 ---------- */
+  .gh{
+    max-width:1240px;margin:0 auto;padding:44px 36px 80px;
+  }
+  .gh-head{
+    display:flex;align-items:flex-end;justify-content:space-between;
+    gap:28px;flex-wrap:wrap;margin-bottom:26px;
+  }
+  .gh-title{
+    margin:0;font-family:"Fraunces","Noto Serif SC",serif;
+    font-size:clamp(26px,3.4vw,36px);font-weight:400;letter-spacing:-.7px;color:var(--ink);
+    display:flex;align-items:baseline;gap:12px;
+  }
+  .gh-title .gh-n{
+    font-family:"JetBrains Mono",ui-monospace,monospace;font-size:13px;
+    color:var(--accent);letter-spacing:0;font-weight:500;
+  }
+  .gh-sub{font-size:13.5px;color:var(--muted);margin-top:8px;letter-spacing:.1px;}
+  .gh-search{
+    position:relative;flex:none;width:290px;max-width:100%;
+  }
+  .gh-search input{
+    width:100%;padding:11px 16px 11px 40px;
+    font-family:inherit;font-size:14px;color:var(--ink);
+    background:var(--paper);border:1px solid var(--line);border-radius:999px;outline:none;
+    transition:border-color .2s,box-shadow .2s;
+  }
+  .gh-search input::placeholder{color:var(--muted);}
+  .gh-search input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft);}
+  .gh-search .gh-ico{position:absolute;left:15px;top:50%;transform:translateY(-50%);color:var(--line-strong);pointer-events:none;}
+
+  .gh-chips{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin-bottom:20px;}
+  .gh-chips[hidden]{display:none;}
+  .gh-chip{
+    appearance:none;cursor:pointer;font-family:inherit;font-size:12.5px;
+    padding:4px 13px;border-radius:999px;
+    background:var(--paper);border:1px solid var(--line);color:var(--muted);
+    transition:color .16s,background .16s,border-color .16s;
+  }
+  .gh-chip:hover{color:var(--ink-2);border-color:var(--line-strong);}
+  .gh-chip.active{background:var(--ink);border-color:var(--ink);color:var(--bg);}
+  .gh-chip-none{font-size:12.5px;color:var(--muted);padding:4px 2px;font-style:italic;}
+  .gh-more{
+    appearance:none;cursor:pointer;font-family:inherit;font-size:12.5px;
+    padding:4px 13px;border-radius:999px;
+    background:none;border:1px dashed var(--line-strong);color:var(--muted);
+    transition:color .16s,border-color .16s,background .16s;
+  }
+  .gh-more:hover{color:var(--accent-ink);border-color:var(--accent);background:var(--accent-soft);}
+  /* display:contents 让里面的标签"穿透"出去，和后面的搜索框、更多按钮
+     共用同一套 flex 换行流 —— 这样搜索框才能像标签一样排在行内 */
+  .gh-chip-list{display:contents;}
+  .gh-tagsearch{position:relative;flex:none;}
+  .gh-tagsearch input{
+    width:100px;padding:4px 12px 4px 26px;
+    font-family:inherit;font-size:12.5px;color:var(--ink);
+    background:var(--paper);border:1px solid var(--line);border-radius:999px;outline:none;
+    transition:width .2s,border-color .2s,box-shadow .2s;
+  }
+  .gh-tagsearch input::placeholder{color:var(--muted);}
+  .gh-tagsearch input:focus{width:148px;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft);}
+  .gh-tagsearch .gh-tagico{position:absolute;left:9px;top:50%;transform:translateY(-50%);color:var(--line-strong);pointer-events:none;}
+
+  .gh-grid{
+    display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:14px;
+  }
+  .gh-card{
+    display:flex;flex-direction:column;gap:10px;
+    padding:17px 18px 15px;
+    background:var(--paper);border:1px solid var(--line);border-radius:11px;
+    text-decoration:none;color:var(--ink);
+    transition:border-color .18s,box-shadow .18s,transform .18s;
+  }
+  .gh-card:hover{
+    border-color:var(--line-strong);
+    box-shadow:0 3px 16px -8px rgba(20,20,19,.18);
+    transform:translateY(-1px);
+  }
+  .gh-row{display:flex;align-items:flex-start;gap:11px;}
+  .gh-avatar{
+    width:30px;height:30px;border-radius:8px;flex:none;overflow:hidden;
+    background:#F4F1EA;border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .gh-avatar img{width:100%;height:100%;object-fit:cover;}
+  .gh-avatar .fb{font-family:"Fraunces",serif;font-size:13px;font-weight:500;color:var(--accent-ink);}
+  .gh-name{
+    font-family:"JetBrains Mono",ui-monospace,monospace;
+    font-size:13.5px;font-weight:500;color:var(--ink);
+    line-height:1.35;letter-spacing:-.2px;
+    word-break:break-word;
+  }
+  .gh-name .owner{color:var(--muted);font-weight:400;}
+  .gh-ago::before{content:"\00b7";margin:0 5px;opacity:.55;}
+  .gh-desc{
+    font-size:13px;color:var(--ink-2);line-height:1.6;margin:0;
+    display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;
+  }
+  .gh-meta{
+    display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+    margin-top:auto;padding-top:3px;
+    font-size:11.5px;color:var(--muted);
+  }
+  .gh-meta .m{display:inline-flex;align-items:center;gap:5px;}
+  .gh-meta .m svg{flex:none;opacity:.75;}
+  .gh-lang-dot{width:8px;height:8px;border-radius:50%;background:var(--line-strong);display:inline-block;}
+  .gh-tagset{display:flex;gap:5px;flex-wrap:wrap;}
+  .gh-tag{
+    font-size:11px;padding:1.5px 8px;border-radius:999px;
+    background:var(--accent-soft);color:var(--accent-ink);
+    white-space:nowrap;
+  }
+  .gh-empty{
+    text-align:center;padding:64px 0;color:var(--muted);
+    font-family:"Fraunces","Noto Serif SC",serif;font-style:italic;font-size:14px;
+  }
+  .gh-foot{margin-top:34px;text-align:center;font-size:12.5px;color:var(--muted);letter-spacing:.2px;}
+  .gh-foot code{
+    font-family:"JetBrains Mono",ui-monospace,monospace;font-size:11.5px;
+    background:var(--paper);border:1px solid var(--line);border-radius:5px;padding:1px 5px;color:var(--ink-2);
+  }
 
   /* ---------- App Center (Launchpad) ---------- */
   .launchpad{
@@ -335,6 +461,12 @@
     .app-icon{width:70px;height:70px;border-radius:17px;}
     .app-icon svg{border-radius:17px;}
     .lp-search{margin-bottom:34px;}
+    .tabs{gap:0;padding:2px;}
+    .tab-count{display:none;}
+    .gh{padding:26px 22px 56px;}
+    .gh-head{margin-bottom:20px;gap:16px;}
+    .gh-search{width:100%;}
+    .gh-grid{grid-template-columns:1fr;gap:11px;}
   }
 </style>
 </head>
@@ -351,6 +483,7 @@
     <nav class="tabs" id="tabs" role="tablist" aria-label="视图切换">
       <button class="tab active" type="button" role="tab" data-view="links" aria-selected="true">导航</button>
       <button class="tab" type="button" role="tab" data-view="apps" aria-selected="false">应用中心</button>
+      <button class="tab" type="button" role="tab" data-view="repos" aria-selected="false">仓库收藏<span class="tab-count" id="tab-count-repos"></span></button>
     </nav>
     <div class="topbar-right">
       <div class="clock-display">
@@ -426,6 +559,38 @@
   </div>
 </div>
 
+<div class="view" id="view-repos" hidden>
+  <div class="gh">
+    <div class="gh-head">
+      <div>
+        <h2 class="gh-title">仓库收藏<span class="gh-n" id="gh-count"></span></h2>
+        <div class="gh-sub">随手捡到的好玩 &amp; 好用项目 &middot; 存在自己站上，随时能翻能搜</div>
+      </div>
+      <div class="gh-search">
+        <svg class="gh-ico" width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <circle cx="7" cy="7" r="4.6" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M10.6 10.6 14 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <input type="search" id="repo-search" placeholder="搜索项目名 / 描述 / 标签…" autocomplete="off" aria-label="搜索收藏的仓库">
+      </div>
+    </div>
+    <div class="gh-chips" id="gh-chips">
+      <span class="gh-chip-list" id="gh-chip-list"></span>
+      <span class="gh-tagsearch" id="gh-tagsearch" hidden>
+        <svg class="gh-tagico" width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <circle cx="7" cy="7" r="4.6" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M10.6 10.6 14 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <input type="search" id="tag-search" placeholder="搜索标签" autocomplete="off" aria-label="搜索标签">
+      </span>
+      <button type="button" class="gh-more" id="gh-more" hidden aria-expanded="false">更多</button>
+    </div>
+    <div class="gh-grid" id="gh-grid"></div>
+    <div class="gh-empty" id="gh-empty" hidden>没找到匹配的项目</div>
+    <div class="gh-foot">发现新项目就往 <code>repos.js</code> 里加一行 &middot; 星标每半小时向 GitHub 自动刷新一次</div>
+  </div>
+</div>
+
 <footer>
   <div class="foot-inner">
     <span>Intelligent-GuoXin &middot; <span class="serif">A personal developer portal</span></span>
@@ -436,8 +601,40 @@
 <div id="sr-live" class="sr-only" aria-live="polite"></div>
 
 <script src="apps.js"></script>
+<script src="repos.js"></script>
 <script src="links.js"></script>
 <script>
+/* ---------- 小工具（供各视图共用） ---------- */
+function escHtml(s){
+  return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){
+    return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c];
+  });
+}
+/* 107633 → 108k；862 → 862 */
+function fmtStars(n){
+  if(n == null) return '';
+  if(n < 1000) return String(n);
+  if(n < 1000000){
+    var k = n / 1000;
+    return (k >= 100 ? Math.round(k) : Math.round(k * 10) / 10) + 'k';
+  }
+  return Math.round(n / 100000) / 10 + 'm';
+}
+/* 从仓库地址解析 owner / repo，兼容末尾斜杠和 .git */
+function parseRepoUrl(url){
+  var m = String(url || '').match(/github\.com\/([^\/?#]+)\/([^\/?#]+)/i);
+  if(!m) return null;
+  return { owner: m[1], repo: m[2].replace(/\.git$/i, '') };
+}
+/* 建库距今多少天（按自然日算，两端都取本地零点，避开时区偏移） */
+function daysSince(ymd){
+  var d = new Date(String(ymd) + 'T00:00:00');
+  if(isNaN(d.getTime())) return null;
+  var today = new Date();
+  today.setHours(0, 0, 0, 0);
+  return Math.max(0, Math.round((today - d) / 86400000));
+}
+
 (function(){
   var ENGINES = {
     google: { action: 'https://www.google.com/search', param: 'q', placeholder: 'Search the web...' },
@@ -583,12 +780,274 @@
     empty.hidden = (list.length !== 0);
   }
 
+  /* ---------- 仓库收藏 (GitHub) ---------- */
+  var repoKeyword = '';
+  var repoTag = '';
+
+  /* 实时数据：'owner/repo' -> { t, stars, created, lang }
+     GitHub 公开接口免鉴权，但限额 60 次/小时/IP，一个仓库一次请求，
+     所以结果写进 localStorage 缓存半小时，避免每次刷页面都把额度烧光。 */
+  var liveMeta = {};
+  var GH_TTL = 30 * 60 * 1000;
+  var GH_KEY = 'gx-gh-repo-meta-v1';
+
+  function ghCacheRead(){
+    try{
+      var o = JSON.parse(localStorage.getItem(GH_KEY) || '{}');
+      return (o && typeof o === 'object') ? o : {};
+    }catch(e){ return {}; }
+  }
+  function ghCacheWrite(o){
+    try{ localStorage.setItem(GH_KEY, JSON.stringify(o)); }catch(e){}
+  }
+
+  /* 返回 true 表示发起了请求（调用方等回调重绘），false 表示全部命中缓存 */
+  function ghFetchLive(items, done){
+    var cache = ghCacheRead();
+    var now = Date.now();
+    var reqs = [];
+    var blocked = false;
+
+    items.forEach(function(it){
+      var full = it.owner + '/' + it.repo;
+      var c = cache[full];
+      if(c && (now - c.t) < GH_TTL){ liveMeta[full] = c; return; }
+      if(blocked) return;
+
+      reqs.push(
+        fetch('https://api.github.com/repos/' + full)
+          .then(function(r){
+            /* 403 / 429 = 额度用尽，本次不再发新请求 */
+            if(r.status === 403 || r.status === 429){ blocked = true; return null; }
+            return r.ok ? r.json() : null;
+          })
+          .then(function(d){
+            if(!d || d.stargazers_count == null) return;
+            var rec = {
+              t: Date.now(),
+              stars: d.stargazers_count,
+              created: String(d.created_at || '').slice(0, 10),
+              lang: d.language || ''
+            };
+            cache[full] = rec;
+            liveMeta[full] = rec;
+          })
+          .catch(function(){})
+      );
+    });
+
+    if(!reqs.length) return false;
+    Promise.all(reqs).then(function(){
+      ghCacheWrite(cache);
+      done();
+    });
+    return true;
+  }
+
+  /* 给每条记录补上从 URL / 实时数据 / 默认值推导出来的字段 */
+  function repoList(){
+    var all = (typeof REPOS === 'undefined') ? [] : REPOS;
+    return all.map(function(r){
+      var p = parseRepoUrl(r.url) || { owner: '', repo: '' };
+      var live = liveMeta[p.owner + '/' + p.repo] || null;
+      var created = (live && live.created) || r.created || '';
+      return {
+        url: r.url,
+        owner: p.owner,
+        repo: p.repo,
+        name: r.name || p.repo || r.url,
+        desc: r.desc || '',
+        tags: r.tags || [],
+        stars: (live && live.stars != null) ? live.stars
+             : (r.stars == null ? null : r.stars),
+        lang: (live && live.lang) || r.lang || '',
+        created: created,
+        days: created ? daysSince(created) : null,
+        live: !!live
+      };
+    });
+  }
+
+  /* 标签默认只露 TAG_LIMIT 个，其余收进「更多」；展开后可用输入框搜标签 */
+  var TAG_LIMIT = 12;
+  var tagExpanded = false;
+  var tagQuery = '';
+
+  function renderRepoChips(list){
+    var box = document.getElementById('gh-chips');
+    var listBox = document.getElementById('gh-chip-list');
+    var searchBox = document.getElementById('gh-tagsearch');
+    var moreBtn = document.getElementById('gh-more');
+    if(!box || !listBox) return;
+
+    var freq = {}, order = [], idx = {};
+    list.forEach(function(r){
+      r.tags.forEach(function(t){
+        if(!t) return;
+        if(freq[t] == null){ freq[t] = 0; idx[t] = order.length; order.push(t); }
+        freq[t]++;
+      });
+    });
+    /* 多个仓库都带的标签排前面（慢慢就沉淀成真正的分类），
+       次数相同时按首次出现顺序，保证顺序稳定 */
+    var allTags = order.slice().sort(function(a, b){
+      return (freq[b] - freq[a]) || (idx[a] - idx[b]);
+    });
+
+    if(searchBox) searchBox.hidden = !tagExpanded;
+
+    /* 收起时输入框是隐藏的，所以 tagQuery 必然为空，不会出现「看不见的过滤」 */
+    var q = tagExpanded ? tagQuery.trim().toLowerCase() : '';
+    var pool = q ? allTags.filter(function(t){
+      return t.toLowerCase().indexOf(q) > -1;
+    }) : allTags;
+
+    var tags = tagExpanded ? pool : allTags.slice(0, TAG_LIMIT);
+    var hiddenCount = allTags.length - TAG_LIMIT;
+
+    /* 已选中的标签一定要露出来，否则收起后看不见自己在筛什么 */
+    if(repoTag && tags.indexOf(repoTag) === -1) tags = [repoTag].concat(tags);
+
+    var html = '<button type="button" class="gh-chip' + (repoTag ? '' : ' active') +
+      '" data-tag="">全部</button>';
+    html += tags.map(function(t){
+      return '<button type="button" class="gh-chip' + (repoTag === t ? ' active' : '') +
+        '" data-tag="' + escHtml(t) + '">' + escHtml(t) + '</button>';
+    }).join('');
+    if(q && pool.length === 0) html += '<span class="gh-chip-none">没有匹配的标签</span>';
+    listBox.innerHTML = html;
+
+    if(moreBtn){
+      if(tagExpanded){
+        moreBtn.hidden = false;
+        moreBtn.textContent = '收起';
+        moreBtn.setAttribute('aria-expanded', 'true');
+      }else if(hiddenCount > 0){
+        moreBtn.hidden = false;
+        moreBtn.textContent = '更多 +' + hiddenCount;
+        moreBtn.setAttribute('aria-expanded', 'false');
+      }else{
+        moreBtn.hidden = true;
+      }
+    }
+
+    box.hidden = (allTags.length === 0);
+  }
+
+  var ICON_STAR = '<svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">' +
+    '<path d="M8 .8l2.2 4.5 5 .7-3.6 3.5.9 4.9L8 12.1l-4.5 2.3.9-4.9L.8 6l5-.7z"/></svg>';
+  var ICON_CAL = '<svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true">' +
+    '<rect x="1.6" y="2.8" width="12.8" height="11.6" rx="2" stroke="currentColor" stroke-width="1.4"/>' +
+    '<path d="M1.6 6.4h12.8M5.4 1.4v2.6M10.6 1.4v2.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>';
+
+  function renderRepos(keyword){
+    var grid = document.getElementById('gh-grid');
+    var empty = document.getElementById('gh-empty');
+    var count = document.getElementById('gh-count');
+    if(!grid) return;
+
+    var all = repoList();
+    var q = (keyword == null ? repoKeyword : keyword).trim().toLowerCase();
+    repoKeyword = q;
+
+    var list = all.filter(function(r){
+      if(repoTag && r.tags.indexOf(repoTag) === -1) return false;
+      if(!q) return true;
+      var hay = [r.name, r.owner, r.repo, r.desc]
+        .concat(r.tags).concat([r.lang]).join(' ').toLowerCase();
+      return hay.indexOf(q) > -1;
+    });
+
+    grid.innerHTML = list.map(function(r){
+      var initial = (r.name || '?').charAt(0).toUpperCase();
+      var tags = r.tags.slice(0, 4).map(function(t){
+        return '<span class="gh-tag">' + escHtml(t) + '</span>';
+      }).join('');
+      return '<a class="gh-card" href="' + escHtml(r.url) + '" target="_blank" rel="noopener noreferrer">' +
+        '<div class="gh-row">' +
+          '<span class="gh-avatar">' +
+            '<img src="https://avatars.githubusercontent.com/' + escHtml(r.owner) + '?s=80" alt="" ' +
+              'data-fb="' + escHtml(initial) + '" onerror="avatarFail(this)">' +
+          '</span>' +
+          '<div style="min-width:0;">' +
+            '<div class="gh-name"><span class="owner">' + escHtml(r.owner) + '/</span>' + escHtml(r.repo) + '</div>' +
+          '</div>' +
+        '</div>' +
+        (r.desc ? '<p class="gh-desc">' + escHtml(r.desc) + '</p>' : '') +
+        (tags ? '<div class="gh-tagset">' + tags + '</div>' : '') +
+        '<div class="gh-meta">' +
+          (r.stars == null ? '' :
+            '<span class="m" title="' + (r.live ? '实时获取' : '本地兜底值') + '">' +
+            ICON_STAR + fmtStars(r.stars) + '</span>') +
+          (r.lang ? '<span class="m"><span class="gh-lang-dot"></span>' + escHtml(r.lang) + '</span>' : '') +
+          (r.created ?
+            '<span class="m" title="建库时间 ' + escHtml(r.created) + '">' + ICON_CAL +
+            escHtml(r.created) +
+            (r.days == null ? '' :
+              '<span class="gh-ago">' + (r.days === 0 ? '今天' : r.days + ' 天前') + '</span>') +
+            '</span>' : '') +
+        '</div>' +
+      '</a>';
+    }).join('');
+
+    renderRepoChips(all);
+
+    grid.hidden = (list.length === 0);
+    if(empty) empty.hidden = (list.length !== 0);
+    if(count) count.textContent = all.length ? String(all.length).padStart(2, '0') : '';
+  }
+
+  function initRepos(){
+    var box = document.getElementById('repo-search');
+    var chips = document.getElementById('gh-chips');
+    var tagInput = document.getElementById('tag-search');
+    var moreBtn = document.getElementById('gh-more');
+
+    if(box) box.addEventListener('input', function(){ renderRepos(box.value); });
+
+    if(chips) chips.addEventListener('click', function(e){
+      var btn = e.target.closest ? e.target.closest('.gh-chip') : null;
+      if(!btn) return;
+      repoTag = btn.getAttribute('data-tag') || '';
+      renderRepos();
+    });
+
+    if(moreBtn) moreBtn.addEventListener('click', function(){
+      tagExpanded = !tagExpanded;
+      /* 收起时连带清掉标签搜索词，避免留下看不见的过滤状态 */
+      if(!tagExpanded){
+        tagQuery = '';
+        if(tagInput) tagInput.value = '';
+      }
+      /* 不自动聚焦搜索框：展开只是想看全部标签时，抢焦点（移动端还会弹键盘）太打扰 */
+      renderRepoChips(repoList());
+    });
+
+    /* 标签搜索框是静态节点（不在重绘范围内），所以输入时不会丢焦点 */
+    if(tagInput) tagInput.addEventListener('input', function(){
+      tagQuery = tagInput.value;
+      renderRepoChips(repoList());
+    });
+
+    var badge = document.getElementById('tab-count-repos');
+    if(badge){
+      var n = repoList().length;
+      badge.textContent = n ? String(n).padStart(2, '0') : '';
+    }
+
+    renderRepos('');
+
+    /* 首屏先用本地兜底值渲染，拿到实时数据后再补一次 */
+    ghFetchLive(repoList(), function(){ renderRepos(); });
+  }
+
   function switchView(view, opts){
-    if(view !== 'apps') view = 'links';
+    if(view !== 'apps' && view !== 'repos') view = 'links';
     currentView = view;
 
-    document.getElementById('view-links').hidden = (view === 'apps');
+    document.getElementById('view-links').hidden = (view !== 'links');
     document.getElementById('view-apps').hidden = (view !== 'apps');
+    document.getElementById('view-repos').hidden = (view !== 'repos');
 
     document.querySelectorAll('#tabs .tab').forEach(function(b){
       var on = b.getAttribute('data-view') === view;
@@ -605,6 +1064,8 @@
     }else{
       var s = document.getElementById('app-search');
       if(s) s.blur();
+      var rs = document.getElementById('repo-search');
+      if(rs) rs.blur();
     }
   }
 
@@ -623,14 +1084,24 @@
     if(box) box.addEventListener('input', function(){ renderApps(box.value); });
 
     renderApps('');
+    initRepos();
 
     if(location.hash === '#apps') switchView('apps', { keepScroll: true });
+    else if(location.hash === '#repos') switchView('repos', { keepScroll: true });
   }
 
   window.faviconFail = function(img){
     img.style.display = 'none';
     var span = document.createElement('span');
     span.className = 'fallback';
+    span.textContent = img.getAttribute('data-fb');
+    img.parentElement.appendChild(span);
+  };
+
+  window.avatarFail = function(img){
+    img.style.display = 'none';
+    var span = document.createElement('span');
+    span.className = 'fb';
     span.textContent = img.getAttribute('data-fb');
     img.parentElement.appendChild(span);
   };
@@ -649,7 +1120,15 @@
       e.preventDefault();
       document.getElementById('search-input').focus();
     }
-    if(e.key === 'Escape' && currentView === 'apps'){
+    if(e.key === 'Escape' && currentView !== 'links'){
+      if(currentView === 'repos'){
+        var ti = document.getElementById('tag-search');
+        if(ti && ti.value && document.activeElement === ti){
+          ti.value = ''; tagQuery = ''; renderRepoChips(repoList()); return;
+        }
+        var rs = document.getElementById('repo-search');
+        if(rs && rs.value){ rs.value = ''; renderRepos(''); return; }
+      }
       switchView('links');
     }
   });
