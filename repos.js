@@ -21,6 +21,14 @@
 
 var REPOS = [
   {
+    url: 'https://github.com/wheresryan22/anatomy',
+    desc: 'Agent Skill：把真实机器和复杂系统画成精致可交互的等距插画，输出 SVG + WebGL/3D 动效',
+    tags: ['等距插画', '轴测图', '图解', '可视化', '原理', '机械', 'skill', 'agent-skill', 'claude', 'svg', 'webgl', '3d', 'javascript'],
+    stars: 8764,
+    lang: 'JavaScript',
+    created: '2026-10-08'
+  },
+  {
     url: 'https://github.com/robbietilton/Compositor',
     desc: 'macOS 版 Photoshop 替代品 —— 原生 Swift 写的开源图片编辑器',
     tags: ['修图', '图像编辑', 'photoshop', 'macos', 'swift', '设计', '开源'],
