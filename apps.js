@@ -67,8 +67,49 @@
     return out;
   }
 
+  /* ---------- 雨夜便利店图标（HOSHINO MART） ---------- */
+  function martGlyph() {
+    return '' +
+      // 暖光橱窗
+      '<rect x="18" y="48" width="60" height="25" rx="2" fill="#FFC98A"/>' +
+      '<rect x="18" y="48" width="60" height="10" fill="#FFE6C2" opacity=".8"/>' +
+      // 竖梃
+      '<path d="M38 48v25M58 48v25" stroke="#2A3038" stroke-width="2" opacity=".45"/>' +
+      // 店内货架剪影
+      '<rect x="21" y="58" width="10" height="15" fill="#C8493F" opacity=".55"/>' +
+      '<rect x="21" y="58" width="10" height="5" fill="#F2C53D" opacity=".55"/>' +
+      '<rect x="41" y="60" width="9" height="13" fill="#3D8FC0" opacity=".45"/>' +
+      // 雨棚
+      '<rect x="15" y="44" width="66" height="4" rx="2" fill="#E8F3EA"/>' +
+      // 招牌
+      '<rect x="16" y="25" width="64" height="18" rx="2.6" fill="#0A6B42"/>' +
+      '<rect x="17.2" y="26.2" width="61.6" height="15.6" rx="2" fill="none" stroke="rgba(160,255,205,.55)" stroke-width="1.1"/>' +
+      // 星标
+      '<path d="M26 29 l1.9 4.9 4.9 1.9 -4.9 1.9 -1.9 4.9 -1.9 -4.9 -4.9 -1.9 4.9 -1.9 z" fill="#F6FFFC"/>' +
+      // 标题条
+      '<rect x="37" y="30.4" width="30" height="5" rx="2.5" fill="#FFFFFF"/>' +
+      '<rect x="37" y="38" width="19" height="2.8" rx="1.4" fill="#9FE9C4"/>' +
+      // 24H 徽标
+      '<rect x="69" y="29" width="11" height="8" rx="1.5" fill="#F7C74A"/>' +
+      // 湿地反光
+      '<rect x="24" y="74" width="3.4" height="6" rx="1.7" fill="#FFC98A" opacity=".5"/>' +
+      '<rect x="36" y="76" width="2.6" height="4" rx="1.3" fill="#9FE9C4" opacity=".42"/>' +
+      '<rect x="52" y="75" width="3.4" height="5" rx="1.7" fill="#FFC98A" opacity=".35"/>' +
+      '<rect x="66" y="76" width="2.4" height="4" rx="1.2" fill="#BFE4FF" opacity=".34"/>';
+  }
+
   /* ---------- 应用清单 ---------- */
   var APPS = [
+    {
+      id: 'hoshino-mart',
+      name: '雨夜便利店',
+      desc: 'HOSHINO MART 雨夜街角 · 三渲二微缩模型 · 纯程序化生成',
+      url: 'apps/hoshino-mart.html',
+      tags: ['便利店', 'hoshino', 'mart', '微缩', '场景', '雨夜', '三渲二', 'cel', '卡通渲染', '霓虹', '治愈', '3d', 'three.js', 'webgl', 'diorama'],
+      badge: 'NEW',
+      glow: 'rgba(60,200,140,.28)',
+      icon: tile('appIconMart', '#1E4B3C', '#0B1512', martGlyph())
+    },
     {
       id: 'rubiks-cube',
       name: '3D 魔方',
