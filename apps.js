@@ -98,8 +98,45 @@
       '<rect x="66" y="76" width="2.4" height="4" rx="1.2" fill="#BFE4FF" opacity=".34"/>';
   }
 
+  /* ---------- 曙光 7102 收音机图标 ---------- */
+  function radioGlyph() {
+    return '' +
+      // 木箱机身
+      '<rect x="11" y="19" width="74" height="58" rx="4.5" fill="#5C3B24"/>' +
+      '<rect x="11" y="19" width="74" height="2.4" rx="1.2" fill="rgba(255,225,190,.26)"/>' +
+      '<rect x="11.8" y="19.8" width="72.4" height="56.4" rx="3.9" fill="none" stroke="rgba(0,0,0,.35)" stroke-width="1.5"/>' +
+      // 喇叭布 + 织纹
+      '<rect x="16" y="27" width="38" height="43" rx="2" fill="#B49C76"/>' +
+      '<path d="M23 27v43M30 27v43M37 27v43M44 27v43M51 27v43" stroke="rgba(72,46,22,.15)" stroke-width=".9"/>' +
+      '<rect x="16" y="27" width="38" height="43" rx="2" fill="none" stroke="rgba(18,10,5,.55)" stroke-width="1.4"/>' +
+      // 刻度盘：暖黄底 + 稀疏刻度 + 红指针
+      '<rect x="59" y="27" width="22" height="15" rx="1.8" fill="#F6DDB0"/>' +
+      '<path d="M59 38.5h22" stroke="rgba(92,52,20,.28)" stroke-width=".8"/>' +
+      '<path d="M62 35.6v2.9M66 34.6v3.9M73.5 34.6v3.9M77.5 35.6v2.9" stroke="rgba(92,52,20,.34)" stroke-width=".8"/>' +
+      '<rect x="68.2" y="27.6" width="1.5" height="13.8" fill="#D8462A"/>' +
+      // 猫眼调谐指示管
+      '<circle cx="70" cy="50" r="5.4" fill="#123B24"/>' +
+      '<circle cx="70" cy="50" r="4.1" fill="#3BE38C"/>' +
+      '<circle cx="70" cy="50" r="4.1" fill="none" stroke="rgba(200,255,225,.45)" stroke-width=".7"/>' +
+      // 两个旋钮
+      '<circle cx="63.6" cy="62.6" r="5.2" fill="#2C1D12"/>' +
+      '<circle cx="63.6" cy="62.6" r="2.1" fill="#C0A87E"/>' +
+      '<circle cx="76.4" cy="62.6" r="5.2" fill="#2C1D12"/>' +
+      '<circle cx="76.4" cy="62.6" r="2.1" fill="#C0A87E"/>';
+  }
+
   /* ---------- 应用清单 ---------- */
   var APPS = [
+    {
+      id: 'shuguang-radio',
+      name: '曙光 7102',
+      desc: '七十年代三波段台式收音机 · 实时合成电台 · 拧旋钮真能听',
+      url: 'apps/shuguang-radio.html',
+      tags: ['收音机', 'radio', '老物件', '怀旧', '70年代', '复古', 'three.js', 'webgl', '3d', '拟物', '合成音频', 'web audio', '猫眼管', '调频'],
+      badge: 'NEW',
+      glow: 'rgba(255,150,60,.30)',
+      icon: tile('appIconRadio', '#4A2E1C', '#160D07', radioGlyph())
+    },
     {
       id: 'hoshino-mart',
       name: '雨夜便利店',
