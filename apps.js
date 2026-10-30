@@ -125,8 +125,30 @@
       '<circle cx="76.4" cy="62.6" r="2.1" fill="#C0A87E"/>';
   }
 
+  /* ---------- 汉字造物炉图标（宣纸底 + 墨字 + 朱线） ---------- */
+  function hanziGlyph() {
+    return '' +
+      // 淡墨衬纸
+      '<rect x="15" y="15" width="66" height="66" rx="5" fill="#FBF7EC"/>' +
+      '<rect x="15.6" y="15.6" width="64.8" height="64.8" rx="4.6" fill="none" stroke="rgba(27,24,21,.16)" stroke-width="1.1"/>' +
+      // 墨字
+      '<text x="48" y="61" font-family="Songti SC,STSong,SimSun,serif" font-size="46" font-weight="500" fill="#1B1815" text-anchor="middle">造</text>' +
+      // 朱红横线
+      '<rect x="33" y="69" width="30" height="3.2" rx="1.6" fill="#AD3524"/>';
+  }
+
   /* ---------- 应用清单 ---------- */
   var APPS = [
+    {
+      id: 'hanzi-forge',
+      name: '汉字造物炉',
+      desc: '取两个部件铸一个字 · 真字给音义 · 假字用反切拟音',
+      url: 'apps/hanzi-forge.html',
+      tags: ['汉字', '造字', '说文', '偏旁', '部首', '字形', '反切', '音韵', '语文', '字典', '教育', '工具', 'hanzi', 'chinese', 'character'],
+      badge: 'NEW',
+      glow: 'rgba(173,53,36,.30)',
+      icon: tile('appIconHanzi', '#F2EBD9', '#CFC3A8', hanziGlyph())
+    },
     {
       id: 'shuguang-radio',
       name: '曙光 7102',
