@@ -1,0 +1,942 @@
+[
+ {
+  "station": "Escape",
+  "genre": "Lo-fi / Chill",
+  "tracks": [
+   {
+    "n": 1,
+    "file": "Escape/01 - Amr Portrait Of You.ogg",
+    "raw": "amr_portrait_of_you",
+    "title": "Amr Portrait Of You",
+    "secs": 223.9
+   },
+   {
+    "n": 2,
+    "file": "Escape/02 - Anlou Summer Bump.ogg",
+    "raw": "anlou_summer_bump",
+    "title": "Anlou Summer Bump",
+    "secs": 143.8
+   },
+   {
+    "n": 3,
+    "file": "Escape/03 - Attlas Mango Angel Montreal.ogg",
+    "raw": "attlas_mango_angel_montreal",
+    "title": "Attlas Mango Angel Montreal",
+    "secs": 179.5
+   },
+   {
+    "n": 4,
+    "file": "Escape/04 - Balearic Moods Slick.ogg",
+    "raw": "balearic_moods_slick",
+    "title": "Balearic Moods Slick",
+    "secs": 202.7
+   },
+   {
+    "n": 5,
+    "file": "Escape/05 - Beats De Rap Chillhop Music Chill Beats Kid Sleep Lofi.ogg",
+    "raw": "beats_de_rap_chillhop_music_chill_beats_kid_sleep_lofi",
+    "title": "Beats De Rap Chillhop Music Chill Beats Kid Sleep Lofi",
+    "secs": 137.4
+   },
+   {
+    "n": 6,
+    "file": "Escape/06 - Chill Jazzy Orchestra Kitty.ogg",
+    "raw": "chill_jazzy_orchestra_kitty",
+    "title": "Chill Jazzy Orchestra Kitty",
+    "secs": 191.9
+   },
+   {
+    "n": 7,
+    "file": "Escape/07 - Chill Jazzy Orchestra Unnamed.ogg",
+    "raw": "chill_jazzy_orchestra_unnamed",
+    "title": "Chill Jazzy Orchestra Unnamed",
+    "secs": 218.5
+   },
+   {
+    "n": 8,
+    "file": "Escape/08 - Chillesto Stray.ogg",
+    "raw": "chillesto_stray",
+    "title": "Chillesto Stray",
+    "secs": 195.5
+   },
+   {
+    "n": 9,
+    "file": "Escape/09 - Dj Cracker Remedy In Hz.ogg",
+    "raw": "dj_cracker_remedy_in_hz",
+    "title": "Dj Cracker Remedy In Hz",
+    "secs": 151.1
+   },
+   {
+    "n": 10,
+    "file": "Escape/10 - Finding Mero In Loving Memories.ogg",
+    "raw": "finding_mero_in_loving_memories",
+    "title": "Finding Mero In Loving Memories",
+    "secs": 179.5
+   },
+   {
+    "n": 11,
+    "file": "Escape/11 - Frostycat Revenger.ogg",
+    "raw": "frostycat_revenger",
+    "title": "Frostycat Revenger",
+    "secs": 161.1
+   },
+   {
+    "n": 12,
+    "file": "Escape/12 - Frostycat Shiawase.ogg",
+    "raw": "frostycat_shiawase",
+    "title": "Frostycat Shiawase",
+    "secs": 165.1
+   },
+   {
+    "n": 13,
+    "file": "Escape/13 - Karmawin Lofi Trumpet Satisfaction.ogg",
+    "raw": "karmawin_lofi_trumpet_satisfaction",
+    "title": "Karmawin Lofi Trumpet Satisfaction",
+    "secs": 177.0
+   },
+   {
+    "n": 14,
+    "file": "Escape/14 - La Cantina To Sail Without A Compass.ogg",
+    "raw": "la_cantina_to_sail_without_a_compass",
+    "title": "La Cantina To Sail Without A Compass",
+    "secs": 156.1
+   },
+   {
+    "n": 15,
+    "file": "Escape/15 - Lofi Crew Chill Hip Hop Beats Lofi Chill Nature Lofi Hip Hop.ogg",
+    "raw": "lofi_crew_chill_hip_hop_beats_lofi_chill_nature_lofi_hip_hop",
+    "title": "Lofi Crew Chill Hip Hop Beats Lofi Chill Nature Lofi Hip Hop",
+    "secs": 132.1
+   },
+   {
+    "n": 16,
+    "file": "Escape/16 - Lucid Keys When I Rest Live.ogg",
+    "raw": "lucid_keys_when_i_rest_live",
+    "title": "Lucid Keys When I Rest Live",
+    "secs": 180.3
+   },
+   {
+    "n": 17,
+    "file": "Escape/17 - Neo Noir Starlight Moss.ogg",
+    "raw": "neo_noir_starlight_moss",
+    "title": "Neo Noir Starlight Moss",
+    "secs": 141.0
+   },
+   {
+    "n": 18,
+    "file": "Escape/18 - Oracle Breathless.ogg",
+    "raw": "oracle_breathless",
+    "title": "Oracle Breathless",
+    "secs": 188.5
+   },
+   {
+    "n": 19,
+    "file": "Escape/19 - Pbdr Nebula.ogg",
+    "raw": "pbdr_nebula",
+    "title": "Pbdr Nebula",
+    "secs": 147.8
+   },
+   {
+    "n": 20,
+    "file": "Escape/20 - Slowmo Summer Thoughts.ogg",
+    "raw": "slowmo_summer_thoughts",
+    "title": "Slowmo Summer Thoughts",
+    "secs": 207.3
+   },
+   {
+    "n": 21,
+    "file": "Escape/21 - Streambeats By Harris Heller A Moment Suspended.ogg",
+    "raw": "streambeats_by_harris_heller_a_moment_suspended",
+    "title": "Streambeats By Harris Heller A Moment Suspended",
+    "secs": 139.5
+   },
+   {
+    "n": 22,
+    "file": "Escape/22 - Streambeats By Harris Heller Dawns Early Light.ogg",
+    "raw": "streambeats_by_harris_heller_dawns_early_light",
+    "title": "Streambeats By Harris Heller Dawns Early Light",
+    "secs": 150.8
+   },
+   {
+    "n": 23,
+    "file": "Escape/23 - Streambeats By Harris Heller Dewdrop Dawn.ogg",
+    "raw": "streambeats_by_harris_heller_dewdrop_dawn",
+    "title": "Streambeats By Harris Heller Dewdrop Dawn",
+    "secs": 150.5
+   },
+   {
+    "n": 24,
+    "file": "Escape/24 - Streambeats By Harris Heller Neon In The Metropolis.ogg",
+    "raw": "streambeats_by_harris_heller_neon_in_the_metropolis",
+    "title": "Streambeats By Harris Heller Neon In The Metropolis",
+    "secs": 145.8
+   },
+   {
+    "n": 25,
+    "file": "Escape/25 - Streambeats By Harris Heller Thoughts Of The Past.ogg",
+    "raw": "streambeats_by_harris_heller_thoughts_of_the_past",
+    "title": "Streambeats By Harris Heller Thoughts Of The Past",
+    "secs": 137.8
+   },
+   {
+    "n": 26,
+    "file": "Escape/26 - Stuart Moore Medicine For The Mind.ogg",
+    "raw": "stuart_moore_medicine_for_the_mind",
+    "title": "Stuart Moore Medicine For The Mind",
+    "secs": 151.5
+   },
+   {
+    "n": 27,
+    "file": "Escape/27 - The Midnight Rambler Half Past Midnight.ogg",
+    "raw": "the_midnight_rambler_half_past_midnight",
+    "title": "The Midnight Rambler Half Past Midnight",
+    "secs": 129.1
+   },
+   {
+    "n": 28,
+    "file": "Escape/28 - Zensei Games.ogg",
+    "raw": "zensei_games",
+    "title": "Zensei Games",
+    "secs": 159.2
+   },
+   {
+    "n": 29,
+    "file": "Escape/29 - Zensei Oasis.ogg",
+    "raw": "zensei_oasis",
+    "title": "Zensei Oasis",
+    "secs": 165.7
+   }
+  ]
+ },
+ {
+  "station": "Pop Gear",
+  "genre": "Pop",
+  "tracks": [
+   {
+    "n": 1,
+    "file": "Pop_Gear/01 - Aldon Calling Me Baby.ogg",
+    "raw": "aldon_calling_me_baby",
+    "title": "Aldon Calling Me Baby",
+    "secs": 165.3
+   },
+   {
+    "n": 2,
+    "file": "Pop_Gear/02 - Anita Partnick Atmo.ogg",
+    "raw": "anita_partnick_atmo",
+    "title": "Anita Partnick Atmo",
+    "secs": 192.5
+   },
+   {
+    "n": 3,
+    "file": "Pop_Gear/03 - Chrly K Target.ogg",
+    "raw": "chrly_k_target",
+    "title": "Chrly K Target",
+    "secs": 137.1
+   },
+   {
+    "n": 4,
+    "file": "Pop_Gear/04 - Deniz Love Other Side.ogg",
+    "raw": "deniz_love_other_side",
+    "title": "Deniz Love Other Side",
+    "secs": 177.4
+   },
+   {
+    "n": 5,
+    "file": "Pop_Gear/05 - Eric Papilaya Louie Austen California Silhouette.ogg",
+    "raw": "eric_papilaya_louie_austen_california_silhouette",
+    "title": "Eric Papilaya Louie Austen California Silhouette",
+    "secs": 167.7
+   },
+   {
+    "n": 6,
+    "file": "Pop_Gear/06 - Georgie Wells Cool Off.ogg",
+    "raw": "georgie_wells_cool_off",
+    "title": "Georgie Wells Cool Off",
+    "secs": 187.7
+   },
+   {
+    "n": 7,
+    "file": "Pop_Gear/07 - Georgie Wells Good Time.ogg",
+    "raw": "georgie_wells_good_time",
+    "title": "Georgie Wells Good Time",
+    "secs": 143.8
+   },
+   {
+    "n": 8,
+    "file": "Pop_Gear/08 - Georgie Wells Got To Keep On Moving.ogg",
+    "raw": "georgie_wells_got_to_keep_on_moving",
+    "title": "Georgie Wells Got To Keep On Moving",
+    "secs": 153.1
+   },
+   {
+    "n": 9,
+    "file": "Pop_Gear/09 - Helaine Vis Destiny.ogg",
+    "raw": "helaine_vis_destiny",
+    "title": "Helaine Vis Destiny",
+    "secs": 252.8
+   },
+   {
+    "n": 10,
+    "file": "Pop_Gear/10 - Ivy Bakes Feat Bonf1r3 Muevelo Move It.ogg",
+    "raw": "ivy_bakes_feat_bonf1r3_muevelo_move_it",
+    "title": "Ivy Bakes Feat Bonf1r3 Muevelo Move It",
+    "secs": 121.7
+   },
+   {
+    "n": 11,
+    "file": "Pop_Gear/11 - Jessie Villa Matt Wigton Wire.ogg",
+    "raw": "jessie_villa_matt_wigton_wire",
+    "title": "Jessie Villa Matt Wigton Wire",
+    "secs": 231.8
+   },
+   {
+    "n": 12,
+    "file": "Pop_Gear/12 - Kate Lawa New Chapter.ogg",
+    "raw": "kate_lawa_new_chapter",
+    "title": "Kate Lawa New Chapter",
+    "secs": 142.3
+   },
+   {
+    "n": 13,
+    "file": "Pop_Gear/13 - Lune Electrique L Espoir D Argent.ogg",
+    "raw": "lune_electrique_l_espoir_d_argent",
+    "title": "Lune Electrique L Espoir D Argent",
+    "secs": 188.5
+   },
+   {
+    "n": 14,
+    "file": "Pop_Gear/14 - Monelle Modika Mata Secrets.ogg",
+    "raw": "monelle_modika_mata_secrets",
+    "title": "Monelle Modika Mata Secrets",
+    "secs": 161.9
+   },
+   {
+    "n": 15,
+    "file": "Pop_Gear/15 - Moody Case Finally Free.ogg",
+    "raw": "moody_case_finally_free",
+    "title": "Moody Case Finally Free",
+    "secs": 174.5
+   },
+   {
+    "n": 16,
+    "file": "Pop_Gear/16 - Palace Winter Rose.ogg",
+    "raw": "palace_winter_rose",
+    "title": "Palace Winter Rose",
+    "secs": 249.8
+   },
+   {
+    "n": 17,
+    "file": "Pop_Gear/17 - Pet Puma Spaceship.ogg",
+    "raw": "pet_puma_spaceship",
+    "title": "Pet Puma Spaceship",
+    "secs": 216.0
+   },
+   {
+    "n": 18,
+    "file": "Pop_Gear/18 - Pop Etc Never In Love.ogg",
+    "raw": "pop_etc_never_in_love",
+    "title": "Pop Etc Never In Love",
+    "secs": 291.4
+   },
+   {
+    "n": 19,
+    "file": "Pop_Gear/19 - Pop Levi Calling Me Down.ogg",
+    "raw": "pop_levi_calling_me_down",
+    "title": "Pop Levi Calling Me Down",
+    "secs": 218.4
+   },
+   {
+    "n": 20,
+    "file": "Pop_Gear/20 - Pop Levi Never Never Love.ogg",
+    "raw": "pop_levi_never_never_love",
+    "title": "Pop Levi Never Never Love",
+    "secs": 187.4
+   },
+   {
+    "n": 21,
+    "file": "Pop_Gear/21 - Rangleklods Your House.ogg",
+    "raw": "rangleklods_your_house",
+    "title": "Rangleklods Your House",
+    "secs": 229.1
+   },
+   {
+    "n": 22,
+    "file": "Pop_Gear/22 - Scarlett Solo Innxcent Do It Anyway.ogg",
+    "raw": "scarlett_solo_innxcent_do_it_anyway",
+    "title": "Scarlett Solo Innxcent Do It Anyway",
+    "secs": 142.5
+   },
+   {
+    "n": 23,
+    "file": "Pop_Gear/23 - School Of X 1989.ogg",
+    "raw": "school_of_x_1989",
+    "title": "School Of X 1989",
+    "secs": 209.0
+   },
+   {
+    "n": 24,
+    "file": "Pop_Gear/24 - School Of X Where Is The Magic.ogg",
+    "raw": "school_of_x_where_is_the_magic",
+    "title": "School Of X Where Is The Magic",
+    "secs": 182.0
+   },
+   {
+    "n": 25,
+    "file": "Pop_Gear/25 - Shells By The Sea Marigold.ogg",
+    "raw": "shells_by_the_sea_marigold",
+    "title": "Shells By The Sea Marigold",
+    "secs": 129.1
+   },
+   {
+    "n": 26,
+    "file": "Pop_Gear/26 - Tommy Welton Born To Roam.ogg",
+    "raw": "tommy_welton_born_to_roam",
+    "title": "Tommy Welton Born To Roam",
+    "secs": 154.5
+   },
+   {
+    "n": 27,
+    "file": "Pop_Gear/27 - Tony Back In Time.ogg",
+    "raw": "tony_back_in_time",
+    "title": "Tony Back In Time",
+    "secs": 184.6
+   },
+   {
+    "n": 28,
+    "file": "Pop_Gear/28 - Tut Tut Child Beth Cole If I Could.ogg",
+    "raw": "tut_tut_child_beth_cole_if_i_could",
+    "title": "Tut Tut Child Beth Cole If I Could",
+    "secs": 194.3
+   },
+   {
+    "n": 29,
+    "file": "Pop_Gear/29 - Vanessa Campagna Life Is Tough But So Are You.ogg",
+    "raw": "vanessa_campagna_life_is_tough_but_so_are_you",
+    "title": "Vanessa Campagna Life Is Tough But So Are You",
+    "secs": 149.8
+   },
+   {
+    "n": 30,
+    "file": "Pop_Gear/30 - Venusraps Airdee Mshine.ogg",
+    "raw": "venusraps_airdee_mshine",
+    "title": "Venusraps Airdee Mshine",
+    "secs": 140.0
+   },
+   {
+    "n": 31,
+    "file": "Pop_Gear/31 - Vera Lipa Have To Stay.ogg",
+    "raw": "vera_lipa_have_to_stay",
+    "title": "Vera Lipa Have To Stay",
+    "secs": 149.6
+   }
+  ]
+ },
+ {
+  "station": "PUMP IT!",
+  "genre": "EDM / Dance",
+  "tracks": [
+   {
+    "n": 1,
+    "file": "PUMP_IT/01 - Akumen Bring It.ogg",
+    "raw": "akumen_bring_it",
+    "title": "Akumen Bring It",
+    "secs": 396.0
+   },
+   {
+    "n": 2,
+    "file": "PUMP_IT/02 - Ariel Hill Easy To Forget.ogg",
+    "raw": "ariel_hill_easy_to_forget",
+    "title": "Ariel Hill Easy To Forget",
+    "secs": 159.0
+   },
+   {
+    "n": 3,
+    "file": "PUMP_IT/03 - Arthem Electronic Madness.ogg",
+    "raw": "arthem_electronic_madness",
+    "title": "Arthem Electronic Madness",
+    "secs": 253.7
+   },
+   {
+    "n": 4,
+    "file": "PUMP_IT/04 - Back To The Future Rebel Bunny.ogg",
+    "raw": "back_to_the_future_rebel_bunny",
+    "title": "Back To The Future Rebel Bunny",
+    "secs": 152.0
+   },
+   {
+    "n": 5,
+    "file": "PUMP_IT/05 - Dd Curry You Got This.ogg",
+    "raw": "dd_curry_you_got_this",
+    "title": "Dd Curry You Got This",
+    "secs": 321.3
+   },
+   {
+    "n": 6,
+    "file": "PUMP_IT/06 - Deetorade When I Am Lost.ogg",
+    "raw": "deetorade_when_i_am_lost",
+    "title": "Deetorade When I Am Lost",
+    "secs": 107.4
+   },
+   {
+    "n": 7,
+    "file": "PUMP_IT/07 - Don Bnnr Rebel Bunny Modcube Tick Tock.ogg",
+    "raw": "don_bnnr_rebel_bunny_modcube_tick_tock",
+    "title": "Don Bnnr Rebel Bunny Modcube Tick Tock",
+    "secs": 116.5
+   },
+   {
+    "n": 8,
+    "file": "PUMP_IT/08 - Faded Deep Show Me.ogg",
+    "raw": "faded_deep_show_me",
+    "title": "Faded Deep Show Me",
+    "secs": 140.6
+   },
+   {
+    "n": 9,
+    "file": "PUMP_IT/09 - Forget You Devin Xo.ogg",
+    "raw": "forget_you_devin_xo",
+    "title": "Forget You Devin Xo",
+    "secs": 130.7
+   },
+   {
+    "n": 10,
+    "file": "PUMP_IT/10 - Hausman Secrets.ogg",
+    "raw": "hausman_secrets",
+    "title": "Hausman Secrets",
+    "secs": 234.6
+   },
+   {
+    "n": 11,
+    "file": "PUMP_IT/11 - Jamwana Light It Up.ogg",
+    "raw": "jamwana_light_it_up",
+    "title": "Jamwana Light It Up",
+    "secs": 169.1
+   },
+   {
+    "n": 12,
+    "file": "PUMP_IT/12 - Kidso Childhood.ogg",
+    "raw": "kidso_childhood",
+    "title": "Kidso Childhood",
+    "secs": 229.6
+   },
+   {
+    "n": 13,
+    "file": "PUMP_IT/13 - Lane Boy Lissa Fire In Your Eyes.ogg",
+    "raw": "lane_boy_lissa_fire_in_your_eyes",
+    "title": "Lane Boy Lissa Fire In Your Eyes",
+    "secs": 129.0
+   },
+   {
+    "n": 14,
+    "file": "PUMP_IT/14 - Midtown Jack Ilse I Got U.ogg",
+    "raw": "midtown_jack_ilse_i_got_u",
+    "title": "Midtown Jack Ilse I Got U",
+    "secs": 111.9
+   },
+   {
+    "n": 15,
+    "file": "PUMP_IT/15 - Proff Dark Magic.ogg",
+    "raw": "proff_dark_magic",
+    "title": "Proff Dark Magic",
+    "secs": 506.4
+   },
+   {
+    "n": 16,
+    "file": "PUMP_IT/16 - Proff Nibbana.ogg",
+    "raw": "proff_nibbana",
+    "title": "Proff Nibbana",
+    "secs": 258.1
+   },
+   {
+    "n": 17,
+    "file": "PUMP_IT/17 - Sabrina Bellaouel Eclipse.ogg",
+    "raw": "sabrina_bellaouel_eclipse",
+    "title": "Sabrina Bellaouel Eclipse",
+    "secs": 236.2
+   },
+   {
+    "n": 18,
+    "file": "PUMP_IT/18 - Sarahanta Lets Go.ogg",
+    "raw": "sarahanta_lets_go",
+    "title": "Sarahanta Lets Go",
+    "secs": 155.1
+   },
+   {
+    "n": 19,
+    "file": "PUMP_IT/19 - Synth Boy Nothing New.ogg",
+    "raw": "synth_boy_nothing_new",
+    "title": "Synth Boy Nothing New",
+    "secs": 176.5
+   },
+   {
+    "n": 20,
+    "file": "PUMP_IT/20 - Synth Kid Seoul Lights.ogg",
+    "raw": "synth_kid_seoul_lights",
+    "title": "Synth Kid Seoul Lights",
+    "secs": 130.7
+   },
+   {
+    "n": 21,
+    "file": "PUMP_IT/21 - Techster Dark Connection.ogg",
+    "raw": "techster_dark_connection",
+    "title": "Techster Dark Connection",
+    "secs": 137.0
+   },
+   {
+    "n": 22,
+    "file": "PUMP_IT/22 - Techster Hysteria.ogg",
+    "raw": "techster_hysteria",
+    "title": "Techster Hysteria",
+    "secs": 140.3
+   },
+   {
+    "n": 23,
+    "file": "PUMP_IT/23 - Tony Romera Vhs.ogg",
+    "raw": "tony_romera_vhs",
+    "title": "Tony Romera Vhs",
+    "secs": 235.0
+   }
+  ]
+ },
+ {
+  "station": "Roadio",
+  "genre": "Country / Americana",
+  "tracks": [
+   {
+    "n": 1,
+    "file": "Roadio/01 - Amber Lynn Nicol Broader Horizons.ogg",
+    "raw": "amber_lynn_nicol_broader_horizons",
+    "title": "Amber Lynn Nicol Broader Horizons",
+    "secs": 265.4
+   },
+   {
+    "n": 2,
+    "file": "Roadio/02 - Amber Lynn Nicol Happy.ogg",
+    "raw": "amber_lynn_nicol_happy",
+    "title": "Amber Lynn Nicol Happy",
+    "secs": 186.5
+   },
+   {
+    "n": 3,
+    "file": "Roadio/03 - Andrew Galucki More Than One Way To Go Home.ogg",
+    "raw": "andrew_galucki_more_than_one_way_to_go_home",
+    "title": "Andrew Galucki More Than One Way To Go Home",
+    "secs": 186.5
+   },
+   {
+    "n": 4,
+    "file": "Roadio/04 - Cam Pierce Let It Roll On By.ogg",
+    "raw": "cam_pierce_let_it_roll_on_by",
+    "title": "Cam Pierce Let It Roll On By",
+    "secs": 224.7
+   },
+   {
+    "n": 5,
+    "file": "Roadio/05 - Cam Pierce The Hearts Like A Door.ogg",
+    "raw": "cam_pierce_the_hearts_like_a_door",
+    "title": "Cam Pierce The Hearts Like A Door",
+    "secs": 168.4
+   },
+   {
+    "n": 6,
+    "file": "Roadio/06 - Dean Britta Say Goodnight.ogg",
+    "raw": "dean_britta_say_goodnight",
+    "title": "Dean Britta Say Goodnight",
+    "secs": 228.2
+   },
+   {
+    "n": 7,
+    "file": "Roadio/07 - Dianna Corcoran Dillon Dixon I Ll Do My Best To Stop Loving You.ogg",
+    "raw": "dianna_corcoran_dillon_dixon_i_ll_do_my_best_to_stop_loving_you",
+    "title": "Dianna Corcoran Dillon Dixon I Ll Do My Best To Stop Loving You",
+    "secs": 230.9
+   },
+   {
+    "n": 8,
+    "file": "Roadio/08 - Highway Child Hangmans Blues.ogg",
+    "raw": "highway_child_hangmans_blues",
+    "title": "Highway Child Hangmans Blues",
+    "secs": 173.5
+   },
+   {
+    "n": 9,
+    "file": "Roadio/09 - Homesick Hank Leave It Behind.ogg",
+    "raw": "homesick_hank_leave_it_behind",
+    "title": "Homesick Hank Leave It Behind",
+    "secs": 255.9
+   },
+   {
+    "n": 10,
+    "file": "Roadio/10 - Julie Neumark Home.ogg",
+    "raw": "julie_neumark_home",
+    "title": "Julie Neumark Home",
+    "secs": 198.0
+   },
+   {
+    "n": 11,
+    "file": "Roadio/11 - Mayors House Rear View Mirror.ogg",
+    "raw": "mayors_house_rear_view_mirror",
+    "title": "Mayors House Rear View Mirror",
+    "secs": 193.9
+   },
+   {
+    "n": 12,
+    "file": "Roadio/12 - Moses Kidd Down That Road Again.ogg",
+    "raw": "moses_kidd_down_that_road_again",
+    "title": "Moses Kidd Down That Road Again",
+    "secs": 131.6
+   },
+   {
+    "n": 13,
+    "file": "Roadio/13 - Nikki Murray Im Coming Back.ogg",
+    "raw": "nikki_murray_im_coming_back",
+    "title": "Nikki Murray Im Coming Back",
+    "secs": 140.2
+   },
+   {
+    "n": 14,
+    "file": "Roadio/14 - Rae Isla Aftermath.ogg",
+    "raw": "rae_isla_aftermath",
+    "title": "Rae Isla Aftermath",
+    "secs": 220.2
+   },
+   {
+    "n": 15,
+    "file": "Roadio/15 - Rodellos Machine Lila.ogg",
+    "raw": "rodellos_machine_lila",
+    "title": "Rodellos Machine Lila",
+    "secs": 180.3
+   },
+   {
+    "n": 16,
+    "file": "Roadio/16 - Ryan Webster Feat Moses Kidd Wrecking Ball.ogg",
+    "raw": "ryan_webster_feat_moses_kidd_wrecking_ball",
+    "title": "Ryan Webster Feat Moses Kidd Wrecking Ball",
+    "secs": 260.1
+   },
+   {
+    "n": 17,
+    "file": "Roadio/17 - Ryan Webster Keep Rolling On.ogg",
+    "raw": "ryan_webster_keep_rolling_on",
+    "title": "Ryan Webster Keep Rolling On",
+    "secs": 165.5
+   },
+   {
+    "n": 18,
+    "file": "Roadio/18 - Sammy Louis Conor Staveley Behind.ogg",
+    "raw": "sammy_louis_conor_staveley_behind",
+    "title": "Sammy Louis Conor Staveley Behind",
+    "secs": 151.2
+   },
+   {
+    "n": 19,
+    "file": "Roadio/19 - Southern World Dont Shine.ogg",
+    "raw": "southern_world_dont_shine",
+    "title": "Southern World Dont Shine",
+    "secs": 233.2
+   },
+   {
+    "n": 20,
+    "file": "Roadio/20 - This Frontier Needs Heroes My Heart Tells Me Yes.ogg",
+    "raw": "this_frontier_needs_heroes_my_heart_tells_me_yes",
+    "title": "This Frontier Needs Heroes My Heart Tells Me Yes",
+    "secs": 234.5
+   },
+   {
+    "n": 21,
+    "file": "Roadio/21 - Thomm Jutz Come On Down The Highway.ogg",
+    "raw": "thomm_jutz_come_on_down_the_highway",
+    "title": "Thomm Jutz Come On Down The Highway",
+    "secs": 133.7
+   },
+   {
+    "n": 22,
+    "file": "Roadio/22 - Thomm Jutz Gotta Get Gone.ogg",
+    "raw": "thomm_jutz_gotta_get_gone",
+    "title": "Thomm Jutz Gotta Get Gone",
+    "secs": 117.6
+   },
+   {
+    "n": 23,
+    "file": "Roadio/23 - Thomm Jutz Wont Be Long.ogg",
+    "raw": "thomm_jutz_wont_be_long",
+    "title": "Thomm Jutz Wont Be Long",
+    "secs": 124.4
+   },
+   {
+    "n": 24,
+    "file": "Roadio/24 - Tim Easton Peace Of Mind.ogg",
+    "raw": "tim_easton_peace_of_mind",
+    "title": "Tim Easton Peace Of Mind",
+    "secs": 232.0
+   },
+   {
+    "n": 25,
+    "file": "Roadio/25 - Winston Green Pasadena Highway.ogg",
+    "raw": "winston_green_pasadena_highway",
+    "title": "Winston Green Pasadena Highway",
+    "secs": 137.3
+   },
+   {
+    "n": 26,
+    "file": "Roadio/26 - Wlves Believe In Me.ogg",
+    "raw": "wlves_believe_in_me",
+    "title": "Wlves Believe In Me",
+    "secs": 151.8
+   }
+  ]
+ },
+ {
+  "station": "Rust FM",
+  "genre": "Rock",
+  "tracks": [
+   {
+    "n": 1,
+    "file": "Rust_FM/01 - Bolder Damn Monday Mourning.ogg",
+    "raw": "bolder_damn_monday_mourning",
+    "title": "Bolder Damn Monday Mourning",
+    "secs": 183.6
+   },
+   {
+    "n": 2,
+    "file": "Rust_FM/02 - Bronco Bullfrog Poor Mrs Witherspoon.ogg",
+    "raw": "bronco_bullfrog_poor_mrs_witherspoon",
+    "title": "Bronco Bullfrog Poor Mrs Witherspoon",
+    "secs": 346.2
+   },
+   {
+    "n": 3,
+    "file": "Rust_FM/03 - Farm Cottonfield Woman.ogg",
+    "raw": "farm_cottonfield_woman",
+    "title": "Farm Cottonfield Woman",
+    "secs": 235.7
+   },
+   {
+    "n": 4,
+    "file": "Rust_FM/04 - Fyter Flying.ogg",
+    "raw": "fyter_flying",
+    "title": "Fyter Flying",
+    "secs": 229.5
+   },
+   {
+    "n": 5,
+    "file": "Rust_FM/05 - Fyter Fortress Of Fools.ogg",
+    "raw": "fyter_fortress_of_fools",
+    "title": "Fyter Fortress Of Fools",
+    "secs": 270.7
+   },
+   {
+    "n": 6,
+    "file": "Rust_FM/06 - Heavy Cruiser I Ll Receive You.ogg",
+    "raw": "heavy_cruiser_i_ll_receive_you",
+    "title": "Heavy Cruiser I Ll Receive You",
+    "secs": 191.4
+   },
+   {
+    "n": 7,
+    "file": "Rust_FM/07 - Hokus Poke H P Boogie.ogg",
+    "raw": "hokus_poke_h_p_boogie",
+    "title": "Hokus Poke H P Boogie",
+    "secs": 355.1
+   },
+   {
+    "n": 8,
+    "file": "Rust_FM/08 - Holiday Ghosts North Street Air.ogg",
+    "raw": "holiday_ghosts_north_street_air",
+    "title": "Holiday Ghosts North Street Air",
+    "secs": 122.3
+   },
+   {
+    "n": 9,
+    "file": "Rust_FM/09 - Holiday Ghosts Total Crisis.ogg",
+    "raw": "holiday_ghosts_total_crisis",
+    "title": "Holiday Ghosts Total Crisis",
+    "secs": 136.4
+   },
+   {
+    "n": 10,
+    "file": "Rust_FM/10 - Isaac Joel We Go.ogg",
+    "raw": "isaac_joel_we_go",
+    "title": "Isaac Joel We Go",
+    "secs": 182.5
+   },
+   {
+    "n": 11,
+    "file": "Rust_FM/11 - Kat Frankie Home.ogg",
+    "raw": "kat_frankie_home",
+    "title": "Kat Frankie Home",
+    "secs": 182.0
+   },
+   {
+    "n": 12,
+    "file": "Rust_FM/12 - Mama Lion It S Only A Dream.ogg",
+    "raw": "mama_lion_it_s_only_a_dream",
+    "title": "Mama Lion It S Only A Dream",
+    "secs": 169.6
+   },
+   {
+    "n": 13,
+    "file": "Rust_FM/13 - Mount Jacinto Monte Jacinto.ogg",
+    "raw": "mount_jacinto_monte_jacinto",
+    "title": "Mount Jacinto Monte Jacinto",
+    "secs": 236.5
+   },
+   {
+    "n": 14,
+    "file": "Rust_FM/14 - Neil Leyton Fires Of The Heart.ogg",
+    "raw": "neil_leyton_fires_of_the_heart",
+    "title": "Neil Leyton Fires Of The Heart",
+    "secs": 166.6
+   },
+   {
+    "n": 15,
+    "file": "Rust_FM/15 - Promise Putman S Ranch.ogg",
+    "raw": "promise_putman_s_ranch",
+    "title": "Promise Putman S Ranch",
+    "secs": 175.5
+   },
+   {
+    "n": 16,
+    "file": "Rust_FM/16 - Sasami Morning Comes.ogg",
+    "raw": "sasami_morning_comes",
+    "title": "Sasami Morning Comes",
+    "secs": 263.1
+   },
+   {
+    "n": 17,
+    "file": "Rust_FM/17 - Sorry Perfect.ogg",
+    "raw": "sorry_perfect",
+    "title": "Sorry Perfect",
+    "secs": 162.0
+   },
+   {
+    "n": 18,
+    "file": "Rust_FM/18 - The Filthy Souls Boys Will Be Out For A Fight.ogg",
+    "raw": "the_filthy_souls_boys_will_be_out_for_a_fight",
+    "title": "The Filthy Souls Boys Will Be Out For A Fight",
+    "secs": 159.6
+   },
+   {
+    "n": 19,
+    "file": "Rust_FM/19 - Tyrnaround Colour Your Mind.ogg",
+    "raw": "tyrnaround_colour_your_mind",
+    "title": "Tyrnaround Colour Your Mind",
+    "secs": 269.2
+   },
+   {
+    "n": 20,
+    "file": "Rust_FM/20 - Wildwood Free Ride.ogg",
+    "raw": "wildwood_free_ride",
+    "title": "Wildwood Free Ride",
+    "secs": 142.1
+   },
+   {
+    "n": 21,
+    "file": "Rust_FM/21 - Wildwood Mr Wild Love.ogg",
+    "raw": "wildwood_mr_wild_love",
+    "title": "Wildwood Mr Wild Love",
+    "secs": 244.6
+   }
+  ]
+ }
+]

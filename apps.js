@@ -137,8 +137,44 @@
       '<rect x="33" y="69" width="30" height="3.2" rx="1.6" fill="#AD3524"/>';
   }
 
+  /* ---------- 车载电台图标（Game Radio） ---------- */
+  function gameRadioGlyph() {
+    var out = '';
+    // 天线
+    out += '<path d="M60 29 L73 13" stroke="#F4CE9A" stroke-width="2.5" stroke-linecap="round"/>';
+    out += '<circle cx="73.6" cy="12.4" r="2.1" fill="#FFD9A8"/>';
+    // 机身
+    out += '<rect x="17" y="29" width="62" height="43" rx="6.5" fill="#2E2013" stroke="rgba(255,205,150,.5)" stroke-width="1.3"/>';
+    // 扬声器格栅
+    out += '<rect x="23" y="37" width="27" height="3.4" rx="1.7" fill="#EDBE84" opacity=".92"/>';
+    out += '<rect x="23" y="44" width="27" height="3.4" rx="1.7" fill="#DFAE72" opacity=".78"/>';
+    out += '<rect x="23" y="51" width="27" height="3.4" rx="1.7" fill="#CE9C60" opacity=".62"/>';
+    out += '<rect x="23" y="58" width="18" height="3.4" rx="1.7" fill="#BF8F54" opacity=".48"/>';
+    // 调频窗
+    out += '<rect x="55" y="36" width="19" height="9" rx="2" fill="#FFD79B" opacity=".95"/>';
+    out += '<path d="M59 40.5 h11" stroke="#2A1D10" stroke-width="1.6" stroke-linecap="round" opacity=".55"/>';
+    // 旋钮
+    out += '<circle cx="61" cy="57" r="4.6" fill="#F4CE9A" opacity=".92"/>';
+    out += '<circle cx="72" cy="57" r="3.2" fill="#E0B47C" opacity=".8"/>';
+    out += '<path d="M61 53.2 v-1.4" stroke="#241A11" stroke-width="1.6" stroke-linecap="round"/>';
+    // 脚座
+    out += '<rect x="22" y="72" width="8" height="3" rx="1.5" fill="#3A2A1A" opacity=".8"/>';
+    out += '<rect x="66" y="72" width="8" height="3" rx="1.5" fill="#3A2A1A" opacity=".8"/>';
+    return out;
+  }
+
   /* ---------- 应用清单 ---------- */
   var APPS = [
+    {
+      id: 'game-radio',
+      name: '车载电台',
+      desc: 'ETS2 Game Radio · 五个频道 130 首 · 离线音频播放器',
+      url: 'apps/game-radio/index.html',
+      tags: ['电台', 'radio', '音乐', 'music', '播放器', 'player', 'audio', 'ets2', '欧卡', '卡车', 'game radio', 'lo-fi', '摇滚', '电子', '乡村', '流行'],
+      badge: 'NEW',
+      glow: 'rgba(255,180,84,.30)',
+      icon: tile('appIconRadio', '#5A4026', '#1A130C', gameRadioGlyph())
+    },
     {
       id: 'hanzi-forge',
       name: '汉字造物炉',
