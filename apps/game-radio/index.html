@@ -135,6 +135,17 @@
   .empty{padding:26px; text-align:center; color:#5f6a7c; font-size:12.5px}
 
   footer{display:flex; justify-content:space-between; gap:16px; font-size:11px; color:#5f6a7c; flex-wrap:wrap}
+
+  /* ---------- 状态提示 ---------- */
+  #toast{
+    position:fixed; left:28px; bottom:26px; z-index:50;
+    background:rgba(30,36,46,.96); color:var(--txt); border:1px solid #333c4a;
+    border-left:3px solid var(--accent); border-radius:10px;
+    padding:10px 15px; font-size:12.5px; box-shadow:0 10px 26px rgba(0,0,0,.45);
+    opacity:0; transform:translateY(10px); pointer-events:none;
+    transition:opacity .25s, transform .25s; max-width:min(78vw,420px);
+  }
+  #toast.show{opacity:1; transform:translateY(0)}
   /* ---------- responsive / H5 ---------- */
   .wrap > *{min-width:0}
   .stage,.listbox{min-height:0}
@@ -185,6 +196,7 @@
     .tr{padding:10px; gap:10px; font-size:12.5px}
     .tr .i{width:20px}
     footer{display:none}
+    #toast{left:16px; right:16px; bottom:calc(14px + env(safe-area-inset-bottom)); max-width:none}
   }
 
   @media (max-width:560px){
@@ -374,15 +386,62 @@ function paintNow(){
 
 function src(t){ return 'music/' + encodeURI(t.file); }
 
+/* ---------- 播放状态记忆 ---------- */
+const SKEY = 'gr_state';
+let lastSave = 0;
+let pendingPos = 0;   // 还没恢复成功的位置，防止被 pagehide 的 0 秒覆盖掉
+
+function saveState(extra){
+  extra = extra || {};
+  const pos = ('pos' in extra) ? extra.pos : (audio.currentTime || pendingPos || 0);
+  try{
+    localStorage.setItem(SKEY, JSON.stringify(Object.assign({
+      s: cur.s, t: cur.t,
+      pos: pos,
+      v: audio.volume, shuffle: shuffle, repeat: repeat,
+      ts: Date.now()
+    }, extra || {})));
+  }catch(e){}
+}
+
+function toast(msg, ms){
+  let el = document.getElementById('toast');
+  if(!el){ el = document.createElement('div'); el.id = 'toast'; document.body.appendChild(el); }
+  el.textContent = msg;
+  el.classList.add('show');
+  clearTimeout(el._t);
+  el._t = setTimeout(function(){ el.classList.remove('show'); }, ms || 4500);
+}
+
+function paintSeek(pos){
+  const d = audio.duration || 0;
+  $('#tCur').textContent = mmss(pos);
+  if(d > 0){
+    const p = pos / d * 100;
+    $('#seek').value = p;
+    $('#seek').style.setProperty('--p', p + '%');
+  }
+}
+
+/* 用户手势里补上尚未恢复的进度，再播放 —— 避免浏览器拦截自动播放 */
+function doPlay(){
+  if(pendingPos > 1 && audio.readyState >= 1 && audio.currentTime < 1){
+    try{ audio.currentTime = pendingPos; paintSeek(pendingPos); }catch(e){}
+    pendingPos = 0;
+  }
+  audio.play().catch(()=>{});
+}
+
 function playTrack(i, autoplay=true){
   const st = DATA[cur.s];
   cur.t = Math.max(0, Math.min(i, st.tracks.length-1));
   const t = st.tracks[cur.t];
+  pendingPos = 0;
   audio.src = src(t);
   $('#tDur').textContent = mmss(t.secs);
   paintNow();
-  if(autoplay) audio.play().catch(()=>{});
-  localStorage.setItem('gr_state', JSON.stringify({s:cur.s, t:cur.t, v:audio.volume, shuffle, repeat}));
+  if(autoplay) doPlay();
+  saveState({pos: 0});
 }
 
 function switchStation(i){
@@ -417,29 +476,38 @@ function prev(){
   else playTrack(st.tracks.length - 1);
 }
 
-$('#btnPlay').onclick = ()=> audio.paused ? audio.play().catch(()=>{}) : audio.pause();
+$('#btnPlay').onclick = ()=> audio.paused ? doPlay() : audio.pause();
 $('#btnNext').onclick = ()=> next(false);
 $('#btnPrev').onclick = prev;
-$('#btnShuffle').onclick = e => { shuffle = !shuffle; e.currentTarget.classList.toggle('on', shuffle); };
-$('#btnRepeat').onclick = e => { repeat = !repeat; e.currentTarget.classList.toggle('on', repeat); };
+$('#btnShuffle').onclick = e => { shuffle = !shuffle; e.currentTarget.classList.toggle('on', shuffle); saveState(); };
+$('#btnRepeat').onclick = e => { repeat = !repeat; e.currentTarget.classList.toggle('on', repeat); saveState(); };
 $('#seek').oninput = e => { if(audio.duration) audio.currentTime = audio.duration * e.target.value/100; };
+$('#seek').onchange = ()=> saveState();
 $('#vol').oninput = e => { audio.volume = e.target.value; };
+$('#vol').onchange = ()=> saveState();
 $('#search').oninput = renderTracks;
 
 audio.onplay  = ()=>{ $('#now').classList.add('playing'); $('#playIcon').innerHTML = '<path d="M8 5h3v14H8zM13 5h3v14h-3z" fill="currentColor" stroke="none"/>'; };
-audio.onpause = ()=>{ $('#now').classList.remove('playing'); $('#playIcon').innerHTML = '<path d="M8 5l11 7-11 7z" fill="currentColor" stroke="none"/>'; };
+audio.onpause = ()=>{ $('#now').classList.remove('playing'); $('#playIcon').innerHTML = '<path d="M8 5l11 7-11 7z" fill="currentColor" stroke="none"/>'; saveState(); };
 audio.onended = ()=> next(true);
 audio.ontimeupdate = ()=>{
   const d = audio.duration || 0, c = audio.currentTime || 0;
   $('#tCur').textContent = mmss(c);
   if(d){ $('#tDur').textContent = mmss(d); const p = c/d*100;
     $('#seek').value = p; $('#seek').style.setProperty('--p', p + '%'); }
+  // 播放中每 4 秒记一次进度，刷新后能接着听
+  if(!audio.paused && Date.now() - lastSave > 4000){ lastSave = Date.now(); saveState(); }
 };
 audio.onerror = ()=>{ $('#npMeta').textContent = '音频加载失败 —— 若在预览面板中无声，请直接双击打开 index.html'; };
 
+// 关页面 / 切后台时兜底保存
+window.addEventListener('pagehide', ()=> saveState());
+window.addEventListener('beforeunload', ()=> saveState());
+document.addEventListener('visibilitychange', ()=>{ if(document.hidden) saveState(); });
+
 document.addEventListener('keydown', e=>{
   if(e.target.tagName === 'INPUT' && e.key !== 'Escape') return;
-  if(e.code === 'Space'){ e.preventDefault(); audio.paused ? audio.play().catch(()=>{}) : audio.pause(); }
+  if(e.code === 'Space'){ e.preventDefault(); audio.paused ? doPlay() : audio.pause(); }
   else if(e.key === 'ArrowRight'){ audio.currentTime = Math.min(audio.currentTime + 5, audio.duration||0); }
   else if(e.key === 'ArrowLeft'){ audio.currentTime = Math.max(audio.currentTime - 5, 0); }
   else if(e.key === 'n' || e.key === 'N'){ next(false); }
@@ -452,19 +520,48 @@ document.addEventListener('keydown', e=>{
 // restore
 (function init(){
   let s = {s:0, t:0, v:0.8};
-  try{ s = Object.assign(s, JSON.parse(localStorage.getItem('gr_state')||'{}')); }catch(e){}
+  try{ s = Object.assign(s, JSON.parse(localStorage.getItem(SKEY)||'{}')); }catch(e){}
   shuffle = !!s.shuffle; repeat = !!s.repeat;
   $('#btnShuffle').classList.toggle('on', shuffle);
   $('#btnRepeat').classList.toggle('on', repeat);
-  audio.volume = s.v ?? 0.8; $('#vol').value = audio.volume;
+  audio.volume = (typeof s.v === 'number') ? s.v : 0.8;
+  $('#vol').value = audio.volume;
   cur.s = Math.min(s.s||0, DATA.length-1);
   stationColor(cur.s);
   renderStations();
   cur.t = Math.min(s.t||0, DATA[cur.s].tracks.length-1);
   renderTracks();
   paintNow();
-  audio.src = src(DATA[cur.s].tracks[cur.t]);
-  $('#tDur').textContent = mmss(DATA[cur.s].tracks[cur.t].secs);
+  const t = DATA[cur.s].tracks[cur.t];
+  audio.src = src(t);
+  $('#tDur').textContent = mmss(t.secs);
+
+  // 恢复上次播放位置（浏览器不允许自动播放，停在原处等用户按空格 / 点播放继续）
+  const pos = Number(s.pos) || 0;
+  if(pos > 5){
+    pendingPos = pos;
+    const tryApply = function(){
+      if(pendingPos <= 1) return true;
+      const d = audio.duration;
+      if(!isFinite(d) || d <= 0) return false;
+      const target = Math.min(pendingPos, Math.max(0, d - 2));
+      if(target < 5){ pendingPos = 0; return true; }
+      try{ audio.currentTime = target; }catch(e){ return false; }
+      paintSeek(target);
+      $('#npMeta').textContent = '上次听到 ' + mmss(target) + ' · 按空格继续';
+      toast('已恢复上次播放进度 ' + mmss(target));
+      pendingPos = 0;
+      return true;
+    };
+    if(!tryApply()){
+      ['loadedmetadata', 'durationchange', 'canplay'].forEach(function(ev){
+        audio.addEventListener(ev, function onEv(){
+          if(tryApply()) audio.removeEventListener(ev, onEv);
+        });
+      });
+      try{ audio.load(); }catch(e){}
+    }
+  }
 })();
 </script>
 </body>
